@@ -1,4 +1,30 @@
 Apuntes 2
 
 
-
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 FIRST-NAME                                                          
+1 VEHIC-VIEW VIEW OF VEHICLES                                           
+  2 PERSONNEL-ID                                                        
+  2 MAKE                                                                
+END-DEFINE                                                              
+*                                                                       
+LIMIT 15                                                                
+EMP. READ EMPLOY-VIEW BY NAME STARTING FROM 'JONES'                     
+  /*                                                                    
+  VEH. FIND VEHIC-VIEW WITH PERSONNEL-ID = PERSONNEL-ID (EMP.)          
+    
+    IF NO RECORDS FOUND                                                 
+      MOVE '*** NO CAR ***' TO MAKE                                     
+    END-NOREC                                                    
+    /*                               
+    DISPLAY NOTITLE                  
+            NAME (EMP.) (IS=ON)      
+            FIRST-NAME (EMP.) (IS=ON)
+            MAKE (VEH.)              
+  END-FIND                           
+  /*                                 
+END-READ                             
+END

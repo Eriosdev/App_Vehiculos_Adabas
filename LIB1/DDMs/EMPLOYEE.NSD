@@ -1,0 +1,101 @@
+DB: 012 FILE: 011  - EMPLOYEES                        DEFAULT SEQUENCE:   
+TYPE: ADABAS
+ 
+T L DB Name                              F Leng  S D Remark
+- - -- --------------------------------  - ----  - - ------------------------
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      :LineIncrement 10
+*      <Natural Source Header
+  1 AA PERSONNEL-ID                      A    8    D 
+       HD=PERSONNEL/ID
+*      CNNNNNNN                                      
+*      C=COUNTRY                                     
+G 1 AB FULL-NAME                                     
+  2 AC FIRST-NAME                        A   20  N   
+  2 AD MIDDLE-I                          A    1  N   
+  2 AE NAME                              A   20    D 
+  1 AD MIDDLE-NAME                       A   20  N   
+  1 AF MAR-STAT                          A    1  F   
+       HD=MARITAL/STATUS
+*      M=MARRIED                                     
+*      S=SINGLE                                      
+*      D=DIVORCED                                    
+*      W=WIDOWED                                     
+  1 AG SEX                               A    1  F   
+       HD=S/E/X
+  1 AH BIRTH                             D    6    D 
+       HD=DATE/OF/BIRTH
+       EM=YYYY-MM-DD
+  1 AH N@BIRTH                           I    2    D 
+G 1 A1 FULL-ADDRESS                                  
+M 2 AI ADDRESS-LINE                      A   20  N   
+       HD=ADDRESS
+  2 AJ CITY                              A   20  N D 
+  2 AK ZIP                               A   10  N   
+       HD=POSTAL/ADDRESS
+  2 AK POST-CODE                         A   10  N   
+       HD=POSTAL/ADDRESS
+  2 AL COUNTRY                           A    3  N   
+G 1 A2 TELEPHONE                                     
+  2 AN AREA-CODE                         A    6  N   
+       HD=AREA/CODE
+  2 AM PHONE                             A   15  N   
+       HD=TELEPHONE
+  1 AO DEPT                              A    6    D 
+       HD=DEPARTMENT/CODE
+  1 AP JOB-TITLE                         A   25  N D 
+       HD=CURRENT/POSITION
+P 1 AQ INCOME                                        
+*      ANNUAL INCOMES                                
+*      DURING YEARS WITH THE INTER-                  
+*      NATIONAL ENTERPRISE                           
+  2 AR CURR-CODE                         A    3  N   
+       HD=CURRENCY/CODE
+  2 AS SALARY                            P  9.0  N   
+       HD=ANNUAL/SALARY
+M 2 AT BONUS                             P  9.0  N   
+*      BONUS PER YEAR                                
+*      IN CURRRENCY UNIT                             
+G 1 A3 LEAVE-DATA                                    
+*      LEAVE/VACATION INFO                           
+*      FOR EMPLOYEE WITHIN 1 YEAR                    
+  2 AU LEAVE-DUE                         N  2.0      
+       HD=LEAVE/DUE
+*      VACATION DAYS/YEAR                            
+*      EMPLOYEE IS ENTITLED TO                       
+  2 AV LEAVE-TAKEN                       N  2.0  N   
+*      VACATION DAYS TAKEN                           
+*      IN THIS YEAR                                  
+P 1 AW LEAVE-BOOKED                                  
+  2 AX LEAVE-START                       N  8.0  N   
+       HD=LEAVE/START
+       EM=9999/99/99
+  2 AY LEAVE-END                         N  8.0  N   
+       HD=LEAVE/END
+       EM=9999/99/99
+M 1 AZ LANG                              A    3  N D 
+       HD=LANG/SPOKEN
+  1 PH PHONETIC-NAME                     A   20    P 
+*      -------- SOURCE FIELD(S) -------
+*      NAME
+  1 H1 LEAVE-LEFT                        B    4  N S 
+       HD=LEAVE/REMAINING
+*      -------- SOURCE FIELD(S) -------
+*      LEAVE-DUE(1-2)
+*      LEAVE-TAKEN(1-2)
+  1 S1 DEPARTMENT                        A    4    S 
+       HD=SECTION
+*      -------- SOURCE FIELD(S) -------
+*      DEPT(1-4)
+  1 S2 DEPT-PERSON                       A   26    S 
+*      -------- SOURCE FIELD(S) -------
+*      DEPT(1-6)
+*      NAME(1-20)
+P 1 S3 CURRENCY-SALARY                   A   12  N S 
+*      -------- SOURCE FIELD(S) -------
+*      CURR-CODE(1-3)
+*      SALARY(1-9)
+******DDM OUTPUT TERMINATED******

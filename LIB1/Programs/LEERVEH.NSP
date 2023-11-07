@@ -23,14 +23,27 @@ LOCAL
   2 COLOR          (A10) 
   2 ANIO           (N4.0)
 *
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 PERSONNEL-ID          /*                     (A8)
+  2 FULL-NAME             /*
+    3 FIRST-NAME          /*                     (A20)
+    3 MIDDLE-I            /*                   (A1)
+    3 NAME                /*               (A20)
+  2 MIDDLE-NAME           /*                    (A20)
+  2 MAR-STAT              /*                 (A1)
+  2 SEX                   /*            (A1)                       
+*
 1  SPD-ANIO-MARCA          (A24)  /* AUXILIAR SUPERDESCRIPTOR
 1  REDEFINE SPD-ANIO-MARCA   
   2 SPD-ANIO              (A4)
   2 SPD-MARCA             (A20)
 1 I-ANIO     (N4)            /* INPUT ENTRADA
 *
+*
+*********
 END-DEFINE /*  FIN DECLARACIONES
-*                                           /*  INICIO DE LA EJECUCION
+*********
+*                                      /*  INICIO DE LA EJECUCION
 RESET I-ANIO
 INPUT I-ANIO
 *

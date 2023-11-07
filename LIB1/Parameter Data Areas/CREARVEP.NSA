@@ -1,0 +1,20 @@
+DEFINE DATA PARAMETER
+/* >Natural Source Header 000000
+/* :Mode S
+/* :CP
+/* <Natural Source Header
+*
+*  PARAMETER EXTERNA DE CREAR VEHICULO
+*
+1 CREARVEP
+  2 PAR-PROPIETARIO-ID   (A8)  
+  2 PAR-MATRICULA       (A15) 
+  2 PAR-BASTIDOR        (B4)  
+  2 PAR-MARCA           (A20) 
+  2 PAR-MODELO          (A20) 
+  2 PAR-COLOR           (A10) 
+  2 PAR-ANIO            (N4.0)
+*  
+  2 PAR-ERR             (N4) 
+  2 PAR-DESC            (A70)
+END-DEFINE

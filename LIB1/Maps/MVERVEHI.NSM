@@ -1,0 +1,71 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+* MAP2: PROTOTYPE VERSION 820 --- CREATED BY ONE 9.2.1 ---
+* INPUT USING MAP 'XXXXXXXX'
+*     M-ANIO M-BASTIDOR M-COLOR M-MARCA M-MATRICULA M-MODELO
+DEFINE DATA PARAMETER
+1 M-ANIO (N04.0)
+1 M-BASTIDOR (B004)
+1 M-COLOR (A010)
+1 M-MARCA (A020)
+1 M-MATRICULA (A015)
+1 M-MODELO (A020)
+END-DEFINE
+FORMAT PS=024 LS=080 ZP=OFF SG=OFF KD=OFF IP=OFF
+* MAP2: MAP PROFILES *****************************        200***********
+* .TTAAAMMOO   D I D I N D I D I        ?_)^&:+(                       *
+* 024079        N0NNUCN             X        01 SYSPROF NR             *
+************************************************************************
+INPUT          (     IP=OFF                                           /*
+                                                                       )
+ 052T *DATE /*.01S015 A008 .
+      (AD=OD )
+/
+/
+ 017T 'DATOS DEL VEHICULO'
+/
+/
+/
+ 002T 'Matricula.:'
+ 015T M-MATRICULA /*.01U015 A015 .
+      (AD=ODL )
+/
+/
+ 002T 'Bastidor..:'
+ 015T M-BASTIDOR /*.01U008 B004 .
+      (AD=OD )
+/
+/
+ 002T 'Marca.....:'
+ 015T M-MARCA /*.01U020 A020 .
+      (AD=ODL )
+/
+/
+ 002T 'Modelo....:'
+ 015T M-MODELO /*.01U020 A020 .
+      (AD=ODL )
+/
+/
+ 002T 'Color.....:'
+ 015T M-COLOR /*.01U010 A010 .
+      (AD=ODL )
+/
+/
+ 002T 'Año.......:'
+ 015T M-ANIO /*.01U004 N04.0.
+      (AD=ODR )
+/
+/
+/
+ 002T '-' (075)
+/
+ 013T 'PF3<SALIR>'
+/
+/
+/
+/
+* MAP2: VALIDATION *****************************************************
+* MAP2: END OF MAP *****************************************************
+END

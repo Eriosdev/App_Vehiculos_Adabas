@@ -1,0 +1,57 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*  APLICACION VEHICULOS                                                *   
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+LOCAL
+*
+1 M-OPCION   (N4)
+1 M-ERR      (A66)
+*
+END-DEFINE
+*
+RESET M-ERR
+SET KEY PF3 NAMED 'SALIR'
+*
+REPEAT
+*
+  INPUT USING MAP 'MINICIO'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+      RESET M-ERR
+      PERFORM EJECUTAR-OPCION
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+*********************************
+DEFINE SUBROUTINE EJECUTAR-OPCION
+*********************************
+*
+DECIDE ON EVERY VALUE OF M-OPCION                                         
+  VALUE 1                                                           
+     FETCH RETURN 'PCREATEV'                              
+  VALUE 2                                                           
+     FETCH RETURN 'PREADVED'                                                                       
+  NONE VALUE                                                            
+    M-ERR := 'OPCION INTRODUCIDA NO VÁLIDA'
+END-DECIDE
+
+**************
+END-SUBROUTINE
+**************
+END

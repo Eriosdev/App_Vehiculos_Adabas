@@ -1,0 +1,90 @@
+
+
+
+(Mainframe)z/os
+
+ABCDIC
+
+0000
+
+9999
+
+-------------------------------
+TN3270   80*23  (1965) EMULADOR
+-------------------------------
+
+
+
+*****
+LINUX
+******
+ASCII
+
+00000
+
+
+FFFFF
+
+
+
+
+DEFINE DATA
+PARAMETER USING CREARVEP
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID   
+  2 MATRICULA      
+  2 BASTIDOR       
+  2 MARCA            
+  2 MODELO          
+  2 COLOR          
+  2 ANIO           
+*
+**********
+END-DEFINE 
+********** 
+*
+VEHICLES.PROPIETARIO-ID  :=  CREARVEP.PAR-PROPIETARIO-ID 
+VEHICLES.MATRICULA       :=  CREARVEP.PAR-MATRICULA      
+VEHICLES.BASTIDOR        :=  CREARVEP.PAR-BASTIDOR       
+VEHICLES.MARCA           :=  CREARVEP.PAR-MARCA          
+VEHICLES.MODELO          :=  CREARVEP.PAR-MODELO         
+VEHICLES.COLOR           :=  CREARVEP.PAR-COLOR          
+VEHICLES.ANIO            :=  CREARVEP.PAR-ANIO           
+*
+STORE VEHICLES
+END TRANSACTION
+END
+
+
+
+
+DEFINE DATA
+PARAMETER 
+1 PAR-ENTRADA-ISN   (P10)
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES          
+*
+**********
+END-DEFINE 
+********** 
+*
+G1. GET VEHICLES PAR-ENTRADA-ISN
+DELETE (G1.)
+END TRANSACTION
+*
+END
+
+
+
+
+
+
+
+
+
+
+
+

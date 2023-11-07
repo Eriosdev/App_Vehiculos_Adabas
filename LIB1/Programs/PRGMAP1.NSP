@@ -1,0 +1,47 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA 
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID (A8)  
+  2 MATRICULA      (A15) 
+  2 BASTIDOR       (B4)  
+  2 MARCA          (A20) 
+  2 MODELO         (A20) 
+  2 COLOR          (A10) 
+  2 ANIO           (N4.0)
+*
+* MAPA ALTA VEHICULO
+*
+1 MAPA
+  2 M-MATRICULA         (A15)  /*    'AAAAA'     
+  2 M-BASTIDOR          (B4)  /*    334444     
+  2 M-MARCA             (A20)  /*    'SEAT'      
+  2 M-MODELO            (A20)  /*    'PANDA'  
+  2 M-COLOR             (A10)   /*    'AMARILLO' 
+  2 M-ANIO              (N4.0)
+  2 M-TEXTO-INFORMATIVO (A72)
+
+**********
+END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES
+********** 
+*
+INPUT USING MAP 'MCREATEV'
+*
+VEHICLES.PROPIETARIO-ID  :=   '50000100'
+VEHICLES.MATRICULA       :=   MAPA.M-MATRICULA      
+VEHICLES.BASTIDOR        :=   MAPA.M-BASTIDOR       
+VEHICLES.MARCA           :=   MAPA.M-MARCA          
+VEHICLES.MODELO          :=   MAPA.M-MODELO         
+VEHICLES.COLOR           :=   MAPA.M-COLOR          
+VEHICLES.ANIO            :=   MAPA.M-ANIO           
+*
+STORE VEHICLES
+END TRANSACTION
+*
+MAPA.M-TEXTO-INFORMATIVO := 'SE HA DADO DE ALTA UN VEHÍCULO'
+*
+END

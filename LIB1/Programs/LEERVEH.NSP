@@ -1,0 +1,49 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA CREADO POR XXXXX                                          *
+*            FECHA      XXXXX                                          *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+LOCAL
+1 VEHICLES VIEW OF VEHICLES  /* VARIABLES QUE NO SE USAN SE BORRAN
+  2 PROPIETARIO-ID (A8)  
+  2 MATRICULA      (A15) 
+  2 BASTIDOR       (B4)  
+  2 MARCA          (A20) 
+  2 MODELO         (A20) 
+  2 COLOR          (A10) 
+  2 ANIO           (N4.0)
+*
+1  SPD-ANIO-MARCA          (A24)  /* AUXILIAR SUPERDESCRIPTOR
+1  REDEFINE SPD-ANIO-MARCA   
+  2 SPD-ANIO              (A4)
+  2 SPD-MARCA             (A20)
+1 I-ANIO     (N4)            /* INPUT ENTRADA
+*
+END-DEFINE /*  FIN DECLARACIONES
+*                                           /*  INICIO DE LA EJECUCION
+RESET I-ANIO
+INPUT I-ANIO
+*
+SPD-ANIO := I-ANIO        
+*
+R1. READ VEHICLES  BY SUPER-ANIO-MARCA EQ SPD-ANIO-MARCA  /* DESDE 1986
+ IF VEHICLES.ANIO NE I-ANIO  /* 2023
+     ESCAPE BOTTOM           /* SE SALE DEL READ ESCAPA HACIA ABAJO
+ END-IF
+*
+
+ WRITE VEHICLES.ANIO  VEHICLES.PROPIETARIO-ID VEHICLES.MATRICULA 
+END-READ
+*
+*
+END

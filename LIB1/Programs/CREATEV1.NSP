@@ -1,0 +1,46 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA PARA CREAR UN VEHICULO                                *          *
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+LOCAL USING CREARVEP
+LOCAL
+*
+* MAPA ALTA VEHICULO
+*
+1 MCREATEV
+  2 M-MATRICULA         (A15) 
+  2 M-BASTIDOR          (B4)  
+  2 M-MARCA             (A20) 
+  2 M-MODELO            (A20) 
+  2 M-COLOR             (A10) 
+  2 M-ANIO              (N4.0)
+*
+**********
+END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES
+********** 
+*
+INPUT USING MAP 'MCREATEV'
+*
+CREARVEP.PAR-PROPIETARIO-ID   :=   '50000100'
+CREARVEP.PAR-MATRICULA        :=   MCREATEV.M-MATRICULA      
+CREARVEP.PAR-BASTIDOR         :=   MCREATEV.M-BASTIDOR       
+CREARVEP.PAR-MARCA            :=   MCREATEV.M-MARCA          
+CREARVEP.PAR-MODELO           :=   MCREATEV.M-MODELO         
+CREARVEP.PAR-COLOR            :=   MCREATEV.M-COLOR          
+CREARVEP.PAR-ANIO             :=   MCREATEV.M-ANIO           
+*
+* LLAMAMOS AL SUBPROGRAMA PARA CREAR UN VEHICULO
+*
+CALLNAT 'CREARVEH' CREARVEP
+*
+END

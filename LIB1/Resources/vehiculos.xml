@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEMPLATE date="2023-10-30" environment="" name="vehiculos"
+    time="15:36:33" type="DataBrowser" user="" version="1.0">
+    <DEFINITIONS>
+        <DESCRIPTION>Report for DDM VEHICLES</DESCRIPTION>
+        <RECORDLIMIT>0</RECORDLIMIT>
+        <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
+        <OPTIONS>
+            <USEEDITMASK>None</USEEDITMASK>
+            <USEFIELDHEADER>None</USEFIELDHEADER>
+        </OPTIONS>
+    </DEFINITIONS>
+    <DDM dbid="012" fnr="012" name="VEHICLES" type="ada">
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="15" Level="1" Name="MATRICULA" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="B"
+            Header="" Length="4" Level="1" Name="BASTIDOR" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="8" Level="1" Name="PROPIETARIO-ID" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="I"
+            Header="" Length="2" Level="1" Name="N@AC-1" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="GRUPO-DETALLE" Type="G"/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="20" Level="2" Name="MARCA" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
+            Header="" Length="20" Level="2" Name="MODELO" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="10" Level="2" Name="COLOR" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="N"
+            Header="" Length="4.0" Level="1" Name="ANIO" Type=""/>
+        <FIELD Checked="X" Descriptor="D" Editmask="" Format="A"
+            Header="" Length="1" Level="1" Name="CATEGORIA" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
+            Header="" Length="1" Level="1" Name="LEASE-PUR" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="N"
+            Header="" Length="8.0" Level="1" Name="FECHA-COMPRA" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="" Header=""
+            Length="" Level="1" Name="GRUPO-MANTENIMIENTO" Type="G"/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="A"
+            Header="" Length="3" Level="2" Name="MONEDA" Type=""/>
+        <FIELD Checked="X" Descriptor="" Editmask="" Format="P"
+            Header="" Length="7.0" Level="2" Name="COSTE-MANTENIMIEENTO" Type="M">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Checked="X" Descriptor="S" Editmask="" Format="A"
+            Header="" Length="24" Level="1" Name="SUPER-ANIO-MARCA" Type=""/>
+    </DDM>
+    <GENERALFIELDS>
+        <FIELD Editmask="" Format="I" Header="" Length="4" Level="1"
+            Name=".COUNTER" Type="#"/>
+        <FIELD Checked="X" Editmask="" Format="P" Header="" Length="10"
+            Level="1" Name="*ISN" Type="#"/>
+    </GENERALFIELDS>
+</TEMPLATE>

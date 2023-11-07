@@ -1,0 +1,151 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA CREADO POR XXXXX                                          *
+*            FECHA      XXXXX                                          *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID (A8)  
+  2 MATRICULA      (A15) 
+  2 BASTIDOR       (B4)  
+  2 MARCA          (A20) 
+  2 MODELO         (A20) 
+  2 COLOR          (A10) 
+  2 ANIO           (N4.0)
+*
+* AUXILIAR SUPERDESCRPTOR
+*
+1  SPD-ANIO-MARCA          (A24)
+1  REDEFINE SPD-ANIO-MARCA   
+  2 SPD-ANIO              (A4)
+  2 SPD-MARCA             (A20)
+*  
+* MAPA ALTA VEHICULO
+*
+1 MREADVDE  /* LEER VEHICULO DETALLE
+  2 M-SEL               (A1/10)   /* MARCAR CON 10
+  2 M-MATRICULA         (A15/10)  /*    'AAAAA'     
+  2 M-BASTIDOR          (B4/10)  /*    334444     
+  2 M-MARCA             (A20/10)  /*    'SEAT'      
+  2 M-MODELO            (A20/10)  /*    'PANDA'  
+  2 M-COLOR             (A10/10)   /*    'AMARILLO' 
+  2 M-ANIO              (N4.0/10)
+  2 M-ISN               (P10/10) 
+*
+1 W-ISN-VEHSEL          (P10/10)
+*
+1 W-I   (I4)  /* NO USAR NOMBRES CORTOS TIPO I,W,N
+1 W-J   (I4) 
+*
+1 I-ANIO     (N4)
+*
+1 M-I-ANIO               (N4)
+1 REDEFINE M-I-ANIO    
+  2 M-I-ANIO-A4          (A4)
+*
+1 M-FILTRO-ANIO    (N4)
+*
+**********
+END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES
+********** 
+*
+* RESET I-ANIO
+*
+SET KEY PF3 NAMED 'SALIR'
+*
+RESET MREADVDE 
+*
+PERFORM RELLENAR-MAPA
+*
+*
+REPEAT
+*
+  INPUT USING MAP 'MREADVDE'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+*    
+      I-ANIO := M-FILTRO-ANIO
+      PERFORM RELLENAR-MAPA  
+*      
+      PERFORM LEER-MARCADO               
+*  
+      PERFORM RELLENAR-MAPA 
+*
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+*
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+*******************************
+DEFINE SUBROUTINE RELLENAR-MAPA
+*******************************
+*
+SPD-ANIO := I-ANIO
+*  SPD-MARCA             (A20)
+*
+*
+RESET W-I
+*
+R1. READ(10) VEHICLES BY SUPER-ANIO-MARCA EQ SPD-ANIO-MARCA
+*
+  IF R1.ANIO NE I-ANIO
+    ESCAPE TOP
+  END-IF
+  ADD 1 TO W-I
+* 
+  W-ISN-VEHSEL (W-I) := *ISN
+  M-ISN   (W-I)  := *ISN
+  MREADVDE.M-MATRICULA(W-I)   :=   R1.MATRICULA
+  MREADVDE.M-MARCA    (W-I)       :=   R1.MARCA
+  MREADVDE.M-MODELO   (W-I)       :=   R1.MODELO
+  MREADVDE.M-COLOR    (W-I)       :=   R1.COLOR
+  MREADVDE.M-ANIO     (W-I)       :=   R1.ANIO
+*
+END-READ
+
+*
+**************
+END-SUBROUTINE
+**************
+*
+******************************
+DEFINE SUBROUTINE LEER-MARCADO
+******************************
+*
+*
+FOR W-J 1 TO 10                                                        
+*
+  IF M-SEL(W-J) EQ 'V'    
+     CALLNAT 'PVERVEHI'   M-ISN(W-J)   
+     ESCAPE BOTTOM   
+  END-IF
+*
+  IF M-SEL(W-J) EQ 'B'    
+     CALLNAT 'SUBBORRV'   M-ISN(W-J)       
+     ESCAPE BOTTOM   
+  END-IF    
+*                                  
+END-FOR   
+*
+RESET M-SEL(*)
+*
+**************
+END-SUBROUTINE
+**************
+*
+END

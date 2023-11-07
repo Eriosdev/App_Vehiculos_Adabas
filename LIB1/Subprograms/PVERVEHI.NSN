@@ -1,0 +1,71 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA 
+PARAMETER 
+1 PAR-ENTRADA-ISN   (P10)
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID (A8)  
+  2 MATRICULA      (A15) 
+  2 BASTIDOR       (B4)  
+  2 MARCA          (A20) 
+  2 MODELO         (A20) 
+  2 COLOR          (A10) 
+  2 ANIO           (N4.0)
+*
+* MAPA ALTA VEHICULO
+*
+1 MAPA
+  2 M-MATRICULA         (A15)  /*    'AAAAA'     
+  2 M-BASTIDOR          (B4)  /*    334444     
+  2 M-MARCA             (A20)  /*    'SEAT'      
+  2 M-MODELO            (A20)  /*    'PANDA'  
+  2 M-COLOR             (A10)   /*    'AMARILLO' 
+  2 M-ANIO              (N4.0)
+  2 M-TEXTO-INFORMATIVO (A72)
+*
+*
+**********
+END-DEFINE /*  AQUI ACABAN LAS DECLARACIONES
+**********         
+*
+SET KEY PF3 NAMED 'SALIR'
+*
+*
+PERFORM LEER-VEHICULO
+*
+REPEAT
+*
+  INPUT USING MAP 'MVERVEHI'
+*
+  DECIDE ON FIRST *PF-KEY
+    VALUE 'ENTR'
+*  
+   PERFORM LEER-VEHICULO         
+*        
+    VALUE 'PF3'
+      ESCAPE ROUTINE
+*
+    NONE VALUE
+      IGNORE
+  END-DECIDE
+END-REPEAT
+*
+DEFINE SUBROUTINE LEER-VEHICULO
+*
+*
+G1. GET VEHICLES PAR-ENTRADA-ISN
+*             
+   MAPA.M-MATRICULA   :=   G1.MATRICULA       
+   MAPA.M-BASTIDOR    :=   G1.BASTIDOR        
+   MAPA.M-MARCA       :=   G1.MARCA           
+   MAPA.M-MODELO      :=   G1.MODELO          
+   MAPA.M-COLOR       :=   G1.COLOR           
+   MAPA.M-ANIO        :=   G1.ANIO 
+*
+END-SUBROUTINE
+*
+END

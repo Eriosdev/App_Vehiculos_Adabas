@@ -1,0 +1,41 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   SUBPROGRAMA  PARA CREAR VEHICULO                                       *        
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA
+PARAMETER USING CREARVEP
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID   
+  2 MATRICULA      
+  2 BASTIDOR       
+  2 MARCA            
+  2 MODELO          
+  2 COLOR          
+  2 ANIO           
+*
+**********
+END-DEFINE 
+********** 
+*
+VEHICLES.PROPIETARIO-ID  :=  CREARVEP.PAR-PROPIETARIO-ID 
+VEHICLES.MATRICULA       :=  CREARVEP.PAR-MATRICULA      
+VEHICLES.BASTIDOR        :=  CREARVEP.PAR-BASTIDOR       
+VEHICLES.MARCA           :=  CREARVEP.PAR-MARCA          
+VEHICLES.MODELO          :=  CREARVEP.PAR-MODELO         
+VEHICLES.COLOR           :=  CREARVEP.PAR-COLOR          
+VEHICLES.ANIO            :=  CREARVEP.PAR-ANIO           
+*
+STORE VEHICLES
+END TRANSACTION
+END

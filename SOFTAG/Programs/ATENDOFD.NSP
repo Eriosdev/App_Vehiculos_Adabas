@@ -1,0 +1,49 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  /* Declaración del campo PROPIETARIO-ID en EMPLOY-VIEW */
+  2 PROPIETARIO-ID
+  /* Declaración del campo NOMBRE en EMPLOY-VIEW */
+  2 NOMBRE
+  /* Declaración del campo APELLIDO en EMPLOY-VIEW */
+  2 APELLIDO
+  /* Declaración del campo CIUDAD en EMPLOY-VIEW */
+  2 CIUDAD
+  /* Declaración del campo SALARIO con precisión 1 en EMPLOY-VIEW */
+  2 SALARIO (1)
+  /* Declaración del campo CURR-CODE con precisión 1 en EMPLOY-VIEW */
+  2 CURR-CODE (1)
+END-DEFINE
+
+/* Establece un límite para procesar un máximo de 5 registros */
+LIMIT 5
+
+/* Búsqueda de registros en EMPLOY-VIEW por CIUDAD igual a 'PARIS' */
+EMP. FIND EMPLOY-VIEW WITH CIUDAD = 'PARIS'
+  /* Si no se encuentran registros, permite la entrada de datos */
+  IF NO RECORDS FOUND
+    ENTER
+  END-NOREC
+  /* Muestra los valores de PROPIETARIO-ID, NOMBRE, APELLIDO, SALARIO y CURR-CODE en la salida */
+  DISPLAY NOTITLE PROPIETARIO-ID NOMBRE APELLIDO SALARIO (1) CURR-CODE (1)
+  /*
+   AT END OF DATA
+    /* Si el contador de registros encontrados es igual a 0, 
+    /* muestra 'NO RECORDS FOUND' y escapa del programa */
+    IF *COUNTER (EMP.) = 0
+      DISPLAY NOTITLE 'NO RECORDS FOUND'
+      ESCAPE BOTTOM
+    END-IF
+    /* Muestra estadísticas de salario: MÁXIMO, MÍNIMO y PROMEDIO */
+    WRITE NOTITLE / 'Estadisticas de Salario:'
+                  / 7X 'MAXIMUM:' MAX(SALARIO(1)) CURR-CODE (1)
+                  / 7X 'MINIMUM:' MIN(SALARIO(1)) CURR-CODE (1)
+                  / 7X 'AVERAGE:' AVER(SALARIO(1)) CURR-CODE (1)
+    END-ENDDATA
+  /*
+END-FIND
+
+END

@@ -1,0 +1,86 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* https://documentation.softwareag.com/naturalONE/natONE911/natwin/sm/atbreak.htm
+** Example 'ATBEX1S': AT BREAK (structured mode)  
+************************************************************************
+DEFINE DATA LOCAL
+/* Definición de una estructura de datos llamada EMPLOY-VIEW basada en la vista EMPLOYEES */
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+/* Declaración del campo NOMBRE con una longitud máxima de 20 caracteres */
+  2 NOMBRE (A20)
+/* Declaración del campo APELLIDO con una longitud máxima de 20 caracteres */
+  2 APELLIDO (A20)
+/* Declaración del campo CIUDAD con una longitud máxima de 20 caracteres */
+  2 CIUDAD (A20)
+/* Declaración del campo LEAVE-DUE con una longitud máxima de 6 caracteres */
+  2 LEAVE-DUE (A6)
+/* Declaración del campo DEPARTAMENTO con una longitud máxima de 6 caracteres */
+  2 DEPARTAMENTO (A6)
+
+/* Declaración de una variable local llamada #LEAVE-DUE-L con una longitud máxima de 6 caracteres */
+1 #LEAVE-DUE-L (A6)
+END-DEFINE
+
+/* Inicia la lectura de registros de la vista EMPLOY-VIEW, ordenados por el campo CIUDAD */
+DISPLAY NOTITLE 'Lectura EMPLOY-VIEW, ordenados por CIUDAD' (CD=YE AD=U) /
+READ (10) EMPLOY-VIEW BY CIUDAD
+/* Define un punto de interrupción cuando cambia el valor del campo CIUDAD */
+  AT BREAK OF CIUDAD
+    /* Omite tener que pulsar enter al cambiar el valor de CIUDAD */
+    SKIP 1
+  END-BREAK
+  /* Muestra los valores de CIUDAD, NOMBRE y APELLIDO en la salida */
+  DISPLAY NOTITLE CIUDAD (IS=ON) NOMBRE (IS=ON) APELLIDO
+END-READ
+DISPLAY NOTITLE 'Lectura EMPLOY-VIEW, ordenados por CIUDAD (despues de 4 cambios)' (CD=YE AD=U) /
+
+/* Realiza una segunda lectura de registros de EMPLOY-VIEW, ordenados por CIUDAD */
+READ (10) EMPLOY-VIEW BY CIUDAD
+/* Define un punto de interrupción cuando cambia el valor del campo CIUDAD después de 4 cambios */
+  AT BREAK OF CIUDAD /4/
+    /* Omite tener que pulsar enter al cambiar el valor de CIUDAD */
+    SKIP 1
+  END-BREAK
+  /* Muestra los valores de CIUDAD, NOMBRE y APELLIDO en la salida */
+  DISPLAY NOTITLE CIUDAD (IS=ON) NOMBRE (IS=ON) APELLIDO
+END-READ
+*
+
+DISPLAY NOTITLE 'Busca en EMPLOY-VIEW por CIUDAD igual a PARIS o MILLAU' (CD=YE AD=U) /
+/* Establece un límite para procesar un máximo de 5 registros */
+LIMIT 5
+/* Busca registros en la vista EMPLOY-VIEW con CIUDAD igual a 'PARIS' o 'MILLAU' */
+FIND EMPLOY-VIEW WITH CIUDAD = 'PARIS' OR = 'MILLAU'
+  /* Ordena los resultados por CIUDAD y DEPARTAMENTO */
+    SORTED BY CIUDAD DEPARTAMENTO
+*
+  /* Copia el valor de LEAVE-DUE a la variable local #LEAVE-DUE-L */
+  MOVE LEAVE-DUE TO #LEAVE-DUE-L
+*
+  /* Muestra CIUDAD, DEPARTAMENTO, NOMBRE y #LEAVE-DUE-L en la salida */
+  DISPLAY NOTITLE CIUDAD (IS=ON) DEPARTAMENTO (IS=ON) NOMBRE #LEAVE-DUE-L
+*
+  /* Punto de interrupción cuando cambia el valor de DEPARTAMENTO */
+  AT BREAK OF DEPARTAMENTO
+    /* Escribe en la salida sin título */
+    DISPLAY NOTITLE /
+    /* Muestra valores de DEPARTAMENTO y #LEAVE-DUE-L */
+      T*DEPARTAMENTO OLD(DEPARTAMENTO) T*#LEAVE-DUE-L  /
+  END-BREAK
+  /* Punto de interrupción cuando cambia el valor de CIUDAD */
+  AT BREAK OF CIUDAD
+    /* Escribe en la salida sin título */
+    DISPLAY NOTITLE
+    /* Muestra valores de CIUDAD y #LEAVE-DUE-L */
+      T*CIUDAD OLD(CIUDAD) T*#LEAVE-DUE-L  //
+  END-BREAK
+END-FIND
+
+/* Fin del programa */
+END
+
+
+

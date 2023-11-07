@@ -1,0 +1,56 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+**                  AT START OF DATA           
+************************************************************************
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  2 NOMBRE
+  2 APELLIDO
+  2 CIUDAD
+1 #CNTL (A1) INIT <' '>
+1 #CIUDAD (A20) INIT <' '>
+END-DEFINE
+
+/* Bucle de repetición
+REPEAT
+  /* Solicita al usuario ingresar el nombre de la ciudad en #CIUDAD
+  INPUT 'Ingrese ciudad o ''end'' para salir' #CIUDAD
+  EXAMINE #CIUDAD TRANSLATE INTO UPPER
+  MOVE *TRIM(#CIUDAD) TO #CIUDAD
+  /* Si #CIUDAD es (' ') o 'END', detiene el programa
+  IF #CIUDAD = ' ' OR = 'END'
+    STOP
+  END-IF
+
+  /* Busca registros en EMPLOY-VIEW con CIUDAD igual a #CIUDAD
+  FIND EMPLOY-VIEW WITH CIUDAD = #CIUDAD
+/* Si no se encuentran registros, muestra un mensaje y sale del programa
+    IF NO RECORDS FOUND
+      WRITE NOTITLE NOHDR 'NO RECORDS FOUND'
+      ESCAPE BOTTOM
+    END-NOREC
+
+/* Al recuper los datos, permite decidir si desea mostrar los registros
+    AT START OF DATA
+/* Solicita al usuario ingresar 'D' para mostrar los registros en #CNTL
+      INPUT (AD=O) 'Registros encontrados:' *NUMBER //
+        'ENTER ''D'' para verlos' #CNTL (AD=A)
+      EXAMINE #CNTL TRANSLATE INTO UPPER
+      /* Si #CNTL no es igual a 'D', sale del programa
+      IF #CNTL NE 'D'
+        ESCAPE BOTTOM
+      END-IF
+    END-START
+
+    /* Muestra los valores de CIUDAD, NOMBRE y APELLIDO en la salida
+    DISPLAY CIUDAD NOMBRE APELLIDO
+  END-FIND
+/* Fin del bucle de repetición
+END-REPEAT
+
+/* Fin del programa
+END
+

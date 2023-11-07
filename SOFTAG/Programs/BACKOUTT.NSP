@@ -1,0 +1,52 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+** Example 'BOTEX1': BACKOUT TRANSACTION                                
+**                                                                      
+** CAUTION: Executing this example will modify the database records!    
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES  
+2 APELLIDO                                       
+  2 NOMBRE                                                                
+  2 DEPARTAMENTO                                                                
+  2 SEXO                                                           
+  2 SALARIO (1)                                                        
+*                                                                       
+1 #DEPARTAMENTO (A6)                                                            
+1 #RESP (A3)                                                            
+END-DEFINE                                                              
+*                                                                       
+LIMIT 3                                                                 
+INPUT 'DEPARTMENT TO BE UPDATED:' #DEPARTAMENTO    
+EXAMINE #DEPARTAMENTO TRANSLATE INTO UPPER
+
+IF #DEPARTAMENTO = ' '                                                          
+  STOP                                                                  
+END-IF                                       
+*                                            
+FIND EMPLOY-VIEW WITH DEPARTAMENTO = #DEPARTAMENTO           
+  IF NO RECORDS FOUND                        
+    REINPUT 'NO RECORDS FOUND'               
+  END-NOREC                                  
+  INPUT 'Nombre:       ' NOMBRE (AD=O) /
+        'Apellido:     ' APELLIDO (AD=O) //      
+        'Sexo:         ' SEXO (AD=M) /
+        'Salario:      ' SALARIO (1) (AD=M)
+  UPDATE                                     
+END-FIND                                     
+*                                            
+INPUT 'UPDATE TO BE PERFORMED? YES/NO:' #RESP
+EXAMINE #RESP TRANSLATE INTO UPPER
+
+DECIDE ON FIRST #RESP                        
+  VALUE 'YES'                                
+    END TRANSACTION                          
+  VALUE 'NO'                                 
+    BACKOUT TRANSACTION                      
+  NONE                                       
+    REINPUT 'PLEASE ENTER YES OR NO' 
+END-DECIDE
+*                                    
+END

@@ -1,0 +1,45 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+DEFINE DATA LOCAL
+1 EMPLOY-VIEW VIEW OF EMPLOYEES
+  /* Declaración del campo PROPIETARIO-ID en EMPLOY-VIEW 
+  2 PROPIETARIO-ID
+    /* Declaración del campo NOMBRE en EMPLOY-VIEW 
+  2 NOMBRE
+  2 APELLIDO
+  2 COD-POSTAL
+  2 CIUDAD
+    /* Declaración del campo PROFESION en EMPLOY-VIEW 
+  2 PROFESION
+    /* Declaración del campo SALARIO con precisión 1 en EMPLOY-VIEW 
+  2 SALARIO (1)
+    /* Declaración del campo CURR-CODE con precisión 1 en EMPLOY-VIEW 
+  2 CURR-CODE (1)
+*                                                                       
+1 #START-NAME (A20)  
+END-DEFINE
+
+/* Establece un formato de página de 10 líneas 
+FORMAT PS=10
+/* Establece un límite de 10 registros a procesar 
+LIMIT 10
+
+/* Lee registros de EMPLOY-VIEW por PROPIETARIO-ID igual a '20017000' 
+READ EMPLOY-VIEW BY PROPIETARIO-ID FROM '20017000'
+/* Muestra los valores de NOMBRE, PROFESION, Salario y CURR-CODE 
+/* en la salida, y proporciona funciones del sistema 
+  DISPLAY NOTITLE GIVE SYSTEM FUNCTIONS
+   NOMBRE PROFESION 'SALARY' SALARIO(1) CURR-CODE (1)
+  /*   
+  /* Punto de interrupción cuando se llega al final de la página 
+  AT END OF PAGE
+/* Muestra el promedio del salario con CURR-CODE (1) en la página actual 
+    WRITE / 28T 'Salario promedio: ...' AVER(SALARIO(1)) CURR-CODE (1)
+    /* Fin de la página 
+  END-ENDPAGE
+END-READ
+ 
+                                          
+END

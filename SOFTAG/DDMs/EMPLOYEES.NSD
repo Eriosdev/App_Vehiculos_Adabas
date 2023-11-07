@@ -1,0 +1,59 @@
+DB: 012 FILE: 011  - EMPLOYEES                        DEFAULT SEQUENCE: 
+TYPE: ADABAS 
+ 
+T L DB Name                              F Leng  S D Remark 
+- - -- --------------------------------  - ----  - - -------------------- 
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      <Natural Source Header
+  1 AA PROPIETARIO-ID                    A    8    D 
+G 1 AB AB-1 
+  2 AC NOMBRE                            A   20  N 
+  2 AE APELLIDO                          A   20    D 
+  2 AD APELLIDO-2                        A   20  N 
+  1 AF MAR-STAT                          A    1  F 
+  1 AG SEXO                              A    1  F 
+  1 AH DNI                               P  7.0  N D NC 
+  1 AH N@AH-1                            I    2    D INDICATOR OF AH-1 
+G 1 A1 A1-1 
+M 2 AI DIRECCION                         A   20  N 
+  2 AJ CIUDAD                            A   20  N D 
+  2 AK COD-POSTAL                        A   10  N 
+  2 AL AL-1                              A    3  N 
+G 1 A2 A2-1 
+  2 AN LEAVE-DUE                         A    6  N 
+  2 AM AM-1                              A   15  N 
+  1 AO DEPARTAMENTO                      A    6    D 
+  1 AP PROFESION                         A   25  N D 
+P 1 AQ AQ-1 
+  2 AR AR-1                              A    3  N 
+  2 AS AS-1                              P  9.0  N 
+M 2 AT AT-1                              P  9.0  N 
+G 1 A3 A3-1 
+  2 AU AU-1                              N  2.0 
+  2 AV AV-1                              N  2.0  N 
+P 1 AW AW-1 
+  2 AX SALARIO                           N  8.0  N 
+  2 AY AY-1                              N  8.0  N 
+M 1 AZ IDIOMA                            A    3  N D 
+  1 PH PH-1                              A   20    P 
+*      -------- SOURCE FIELD(S) ------- 
+*      AE-1 
+  1 H1 H1-1                              B    4  N S 
+*      -------- SOURCE FIELD(S) ------- 
+*      AU-1(1-2) 
+*      AV-1(1-2) 
+  1 S1 S1-1                              A    4    U 
+*      -------- SOURCE FIELD(S) ------- 
+*      AO-1(1-4) 
+  1 S2 S2-1                              A   26    S 
+*      -------- SOURCE FIELD(S) ------- 
+*      AO-1(1-6) 
+*      AE-1(1-20) 
+P 1 S3 CURR-CODE                         A   12    S 
+*      -------- SOURCE FIELD(S) ------- 
+*      AR-1(1-3) 
+*      AS-1(1-9) 
+******DDM OUTPUT TERMINATED****** 

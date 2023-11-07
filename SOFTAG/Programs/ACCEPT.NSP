@@ -1,0 +1,35 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*
+* https://documentation.softwareag.com/naturalONE/natONE911/natwin/sm/accept.htm
+*
+* ACCEPTy REJECT se utilizan para aceptar/rechazar un registro según 
+* un criterio lógico especificado por el usuario. 
+* La declaración ACCEPT/ REJECT se utiliza con los bucle de 
+* procesamiento READ, FIND, HISTOGRAM
+************************************************************************
+
+DEFINE DATA LOCAL
+/*( imported data fields from Data Definition Module EMPLOYEES
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 NOMBRE (A20)
+  2 MAR-STAT (A1)
+  2 SEXO (A1)
+/*) imported data fields from Data Definition Module EMPLOYEES
+
+END-DEFINE
+*
+READ (10) EMPLOYEES
+  ACCEPT IF SEXO='M' AND MAR-STAT = 'S'
+  WRITE  NOTITLE '=' NOMBRE '=' SEXO 5X '=' MAR-STAT
+  
+END-READ
+WRITE 'Uso de REJECT' 
+READ (10) EMPLOYEES
+  REJECT IF NOMBRE='PATRICE'
+  WRITE  NOTITLE '=' NOMBRE '=' SEXO 5X '=' MAR-STAT
+END-READ
+END

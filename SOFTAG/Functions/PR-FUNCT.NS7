@@ -1,0 +1,17 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+/** New Function PR-FUNCT.
+/**
+/** :author usuario
+DEFINE FUNCTION PR-FUNCT
+  RETURNS (I4) BY VALUE
+  DEFINE DATA PARAMETER
+  1 #SUMMAND1 (I4) BY VALUE
+  1 #SUMMAND2 (I4) BY VALUE
+  END-DEFINE
+  PR-FUNCT := #SUMMAND1 + #SUMMAND2 
+  
+END-FUNCTION
+END

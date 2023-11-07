@@ -1,0 +1,97 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 28, 29, 30, 31                      *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 EMPLOYEES VIEW OF EMPLOYEES
+*
+  2 PERSONNEL-ID 
+  2 FIRST-NAME   
+  2 NAME         
+  2 CITY         
+  2 SALARY (1)
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 PROPIETARIO-ID (A8) /* NC
+  2 MARCA (A20)
+*
+END-DEFINE
+*
+********************** Pag 28 ******************************************
+WRITE 'Criterio por PERSONNEL-ID:' (CD=YE AD=U)
+FIND EMPLOYEES WITH PERSONNEL-ID = '30000100'
+  DISPLAY NOTITLE PERSONNEL-ID FIRST-NAME *ISN *NUMBER *COUNTER
+END-FIND
+*
+WRITE / 'Criterio por NAME:' (CD=YE AD=U)
+FIND (5) EMPLOYEES WITH NAME = 'ADKINSON' 
+  DISPLAY NOTITLE PERSONNEL-ID NAME *ISN *NUMBER *COUNTER
+END-FIND
+*
+WRITE / 'Criterio por CITY:' (CD=YE AD=U)
+FIND (5) EMPLOYEES WITH CITY = 'MADRID' 
+  DISPLAY NOTITLE PERSONNEL-ID CITY *ISN *NUMBER *COUNTER
+END-FIND
+*
+NEWPAGE
+*
+********************** Pag 29 ******************************************
+WRITE / 'Buscar los empleados que tienen coche' (CD=YE AD=U)
+RD. READ (6) EMPLOYEES BY NAME STARTING FROM 'AHL'
+*
+  FD. FIND VEHICLES WITH PROPIETARIO-ID = PERSONNEL-ID (RD.)
+    IF NO RECORDS FOUND
+      WRITE PERSONNEL-ID (RD.) '** NO TIENE COCHE **' (CD=PI) /
+    END-NOREC
+    DISPLAY NOTITLE (ES=OFF IS=ON ZP=ON AL=15)
+      PERSONNEL-ID (RD.)
+      NAME (RD.)
+      FIRST-NAME (RD.)
+      CITY (RD.)
+      MARCA (FD.) (IS=OFF)
+  END-FIND
+*
+END-READ
+*
+NEWPAGE
+*
+********************** Pag 30 ******************************************
+WRITE / 'Buscar empleados entre Millau y Paris' (CD=YE AD=U)
+FIND (10) EMPLOYEES WITH CITY = 'MILLAU' THRU 'PARIS'
+*
+  IF *NUMBER = 0
+    WRITE 'No Existen Empleados...'
+  ELSE
+    DISPLAY NOTITLE PERSONNEL-ID NAME CITY *ISN *NUMBER
+  END-IF
+*
+END-FIND
+*
+NEWPAGE
+*
+********************** Pag 31 ******************************************
+WRITE / 'READ y FIND Combinados' (CD=YE AD=U)
+RD1. READ (10) EMPLOYEES BY NAME STARTING FROM 'AHL'
+*
+  FD1. FIND VEHICLES WITH PROPIETARIO-ID = PERSONNEL-ID (RD1.)
+    IF NO RECORDS FOUND
+      ENTER
+    END-NOREC
+    DISPLAY NOTITLE (ES=OFF IS=ON ZP=ON AL=15)
+      PERSONNEL-ID (RD1.)
+      NAME (RD1.)
+      CITY (RD1.)
+      MARCA (FD1.) (IS=OFF)
+  END-FIND
+*
+END-READ
+END

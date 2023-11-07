@@ -1,0 +1,20 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA PARA CREAR UN VEHICULO                                    *    
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA 
+LOCAL
+*
+END-DEFINE
+WRITE 'HELLO WORLD'
+*
+END

@@ -66,10 +66,6 @@ EMP. READ EMPLOYEES
 *
 END-READ
 *
-
-
-
-
 * RESET I-ANIO
 * INPUT I-ANIO
 * *

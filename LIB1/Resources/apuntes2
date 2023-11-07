@@ -28,3 +28,30 @@ EMP. READ EMPLOY-VIEW BY NAME STARTING FROM 'JONES'
   /*                                 
 END-READ                             
 END
+
+
+
+
+
+
+
+--------------------
+MOVE (AD=IP) CV-ANIO
+MOVE (AD=I)
+MOVE (AD=PN)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

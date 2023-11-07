@@ -1,0 +1,28 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   PROGRAMA PARA CREAR UN VEHICULO                                *          *
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL                                                       
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 PERSONNEL-ID                                                        
+  2 NAME                                                                
+  2 JOB-TITLE                                                           
+  2 CITY                                                                
+END-DEFINE                                                              
+*                                                                       
+FIND EMPLOY-VIEW WITH CITY = 'PARIS'                                    
+                 WHERE JOB-TITLE = 'INGENIEUR COMMERCIAL'       
+  DISPLAY NOTITLE                                                       
+          CITY JOB-TITLE PERSONNEL-ID NAME                              
+END-FIND                                                                
+*                                                                       
+END

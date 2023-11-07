@@ -39,6 +39,8 @@ LOCAL
   2 SPD-MARCA             (A20)
 1 I-ANIO     (N4)            /* INPUT ENTRADA
 *
+
+
 *
 *********
 END-DEFINE /*  FIN DECLARACIONES

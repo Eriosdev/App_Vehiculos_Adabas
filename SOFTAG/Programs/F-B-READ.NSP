@@ -1,0 +1,75 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 23                                  *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 ANIO (N4)
+  2 GRUPO-DETALLE
+    3 MARCA (A20)
+1 SPD-ANIO-MARCA (A24) /* super
+1 REDEFINE SPD-ANIO-MARCA /* divide en locales
+  2 SPD-ANIO (N4)
+  2 SPD-MARCA (A20)
+*
+1 #VARI-A (A20) INIT<'M'> /* ALFANUMERICA
+1 #VARI-B (N3) /* NUMERICA
+1 #I-ANIO (N4) INIT <1982>
+1 #STARTVAL (A20) INIT <'HONDA'>
+1 #ATTR (C)
+END-DEFINE
+*
+WRITE NOTITLE / 'READ EN SECUENCIA FISICA:' (CD=YE AD=U)
+READ (3) VEHICLES IN PHYSICAL SEQUENCE
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE NOTITLE / 'READ EN ORDEN DE ISN:' (CD=YE AD=U)
+READ VEHICLES BY ISN STARTING FROM 2 ENDING AT 3
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE NOTITLE / 'READ EN ORDEN AL DESCRIPTOR MATRICULA:' (CD=YE AD=U)
+READ (3) VEHICLES BY MATRICULA
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+WRITE NOTITLE / 'READ EN ORDEN AL DESCRIPTOR MATRICULA INICIANDO DESDE LA (M):'(CD=YE AD=U)
+READ (3) VEHICLES BY MATRICULA STARTING FROM #VARI-A
+  DISPLAY NOTITLE *ISN MATRICULA MARCA *COUNTER
+END-READ
+*
+************************ FALLA
+WRITE NOTITLE / 'READ EN ORDEN AL SUPERDESCRIPTOR SUPER-ANIO-MARCA:'(CD=YE AD=U)
+READ (10) VEHICLES BY SUPER-ANIO-MARCA EQ SPD-ANIO-MARCA
+  IF VEHICLES.ANIO NE #I-ANIO
+    ESCAPE BOTTOM
+  END-IF
+  DISPLAY NOTITLE *ISN ANIO MATRICULA MARCA *COUNTER
+END-READ
+*
+************************ FALLA
+WRITE NOTITLE / 'READ CON REPOSICION POR MARCA:'(CD=YE AD=U)
+SET KEY PF3
+READ VEHICLES WITH REPOSITION BY MARCA = #STARTVAL
+  INPUT 'NAME:' MARCA /
+    'Enter new start value for repositioning:' #STARTVAL (AD=MT CV=#ATTR) /
+    'Press PF3 to stop'
+  IF *PF-KEY = 'PF3'
+    THEN STOP
+  END-IF
+  IF #ATTR MODIFIED
+    THEN RESET *COUNTER
+  END-IF
+END-READ
+*
+END

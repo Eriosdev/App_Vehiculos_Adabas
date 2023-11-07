@@ -1,0 +1,99 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 9, 10                               *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+************************************************************************
+*                 Declaración de variables. Página 9                   *
+************************************************************************
+*
+* Declaración de variables
+1 #VAR1 (N4) 
+1 #VAR2 (N4)
+1 #VAR3 (A10)
+1 #VARI-A (A20)
+1 #VARI-B (N3.2)
+1 #RESULT (N8)
+* 
+* Arrays
+1 #ARRAY (A4/1:3) /* ARREGLO UNA DIMENSION
+1 #ARRAY1 (I4/1:3,1:3) /* ARREGLO DOS DIMENSIONES
+1 #ARRAY3 (I4/1:3,1:3,1:3) /* ARREGLO TRES DIMENSIONES
+*
+* Variables y arrays con valores iniciales
+1 #INDICE (N2) INIT <1> 
+1 #ARRAY-A(A10/1:4) INIT (1) <'a'> (2) <'b'> (3) <'c'> (4) <'d'> 
+1 #ARRAY-B(A10/1:4)
+*
+END-DEFINE
+*
+************************************************************************
+*                  Asignación de valores. Página 10                    *
+************************************************************************
+*
+WRITE 'Existen dos formas principales para asignar valores a una variable o campo:' (CD=PI) /
+'            1.- usando la instrucción ''MOVE'''(CD=PI) /
+'            2.- el símbolo :='(CD=PI) /
+WRITE 'Asigna 5 a #VAR1' (CD=YE AD=U)
+MOVE 5 TO #VAR1
+#VAR1 := 5
+WRITE 'MOVE 5 TO #VAR1 ó #VAR1 := 5, entonces #VAR1 = ' #VAR1
+  /
+WRITE 'Asigna 5 a #VAR1 y #VAR2' (CD=YE AD=U)
+WRITE 'No es aplicable :=' (CD=PI)
+MOVE 5 TO #VAR1 #VAR2
+WRITE 'MOVE 5 TO #VAR1 #VAR2, entonces #VAR1 #VAR2 =' #VAR1 #VAR2
+  /
+WRITE 'Asigna ''A'' a #VAR3 ' (CD=YE AD=U)
+MOVE 'A' TO #VAR3
+#VAR3 := 'A'
+WRITE "MOVE 'A' TO #VAR3 ó #VAR3 := 'A' entonces #VAR3 =" #VAR3
+  /
+WRITE 'Asigna #VAR1 a #VAR2 ' (CD=YE AD=U)
+MOVE #VAR1 TO #VAR2
+#VAR2 := #VAR1
+WRITE 'MOVE #VAR1 TO #VAR2 ó #VAR2 := #VAR1 entonces #VAR2 = ' #VAR2
+  /
+WRITE 'Rellena #VAR3 con "*" y lo imprime' (CD=YE AD=U)
+WRITE 'Es aplicable := pero mejor MOVE' (CD=PI)
+MOVE ALL '*' TO #VAR3
+WRITE "MOVE ALL '*' TO #VAR3:" #VAR3
+  /
+************************************************************************
+*                Asignación de valores. Arreglos. Página 10            *
+************************************************************************
+*
+WRITE 'RECORDEMOS QUE CON ARRAYS TAMBIEN FUNCIONA :=' (CD=PI)
+WRITE 'Asigna 3444 a #ARRAY(#INDICE)' (CD=YE AD=U)
+MOVE 3444 TO #ARRAY(#INDICE)
+#ARRAY(#INDICE) := 3444
+WRITE 'MOVE 3444 TO #ARRAY(#INDICE):' #ARRAY(#INDICE)
+  /
+WRITE 'Asigna el valor de #ARRAY(#INDICE) a #VAR3' (CD=YE AD=U)
+MOVE #ARRAY(#INDICE) TO #VAR3
+#VAR3 := #ARRAY(#INDICE)
+WRITE 'MOVE #ARRAY(#INDICE) TO #VAR3' #VAR3
+  /
+WRITE 'Asigna #VAR1 al elemento #ARRAY(#INDICE)' (CD=YE AD=U)
+MOVE #VAR1 TO #ARRAY(#INDICE)
+#ARRAY(#INDICE) := #VAR1
+WRITE 'MOVE #VAR1 TO #ARRAY(#INDICE):' #ARRAY(#INDICE)
+  /
+WRITE 'Copia todos los valores de #ARRAY-A a #ARRAY-B' (CD=YE AD=U)
+  /
+WRITE 'MOVE #ARRAY-A(*) TO #ARRAY-B(*)'
+MOVE #ARRAY-A(*) TO #ARRAY-B(*)
+#ARRAY-B(*) := #ARRAY-A(*)
+WRITE 'Valores de array-a en array-b:' (CD=PI)
+WRITE '  #ARRAY-A:' #ARRAY-A(*) 
+WRITE '  #ARRAY-B:' #ARRAY-B(*)
+*
+END

@@ -1,0 +1,103 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 10                                  *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+* variables locales
+1 L-VAR1 (N4)
+1 L-VAR2 (N4)
+1 L-RESULT (N8)
+1 L-RESTO (N8.6) 
+*
+END-DEFINE
+*
+************************************************************************
+*                OPERACIONES ARITMÉTICAS. Página 10
+************************************************************************
+*
+************************************************************************
+*                            SUMA
+************************************************************************
+*
+ADD 3 TO L-VAR1 /* L-VAR1 := L-VAR1 + 3
+WRITE 'SE SUMA 3 A L-VAR1 ' (CD=YE AD=U)
+WRITE 'ADD 3 TO L-VAR1 ó L-VAR1 := L-VAR1 + 3:' L-VAR1 
+  /
+ADD +5 -1 -2 GIVING L-VAR1 
+WRITE 'SE SUMA 5, SE RESTA 1 Y SE RESTA 2 A L-VAR1' (CD=YE AD=U)
+WRITE 'ADD +5 -1 -2 GIVING L-VAR1:' L-VAR1 
+  /
+COMPUTE L-RESULT = L-VAR1 + L-VAR2 /* L-RESULT := L-VAR1 + L-VAR2
+L-RESULT := L-VAR1 + L-VAR2
+WRITE 'SE CALCULA LA SUMA DE L-VAR1 Y L-VAR2' (CD=YE AD=U)
+WRITE 'COMPUTE L-RESULT = L-VAR1 + L-VAR2 ó L-RESULT := L-VAR1 + L-VAR2:' L-RESULT 
+  /
+*
+************************************************************************
+*                            RESTA
+************************************************************************
+*
+SUBTRACT 4 FROM L-VAR1 /* L-VAR1 := L-VAR1 -4
+WRITE 'Se resta 4 de L-VAR1' (CD=YE AD=U)
+WRITE 'SUBTRACT 4 FROM L-VAR1' L-VAR1
+  /
+SUBTRACT 4 FROM 10 GIVING L-VAR1 /* L-VAR1 := 10 -4
+WRITE 'Se resta 4 de 10'
+WRITE 'SUBTRACT 4 FROM 10 GIVING L-VAR1:' L-VAR1
+  /
+COMPUTE L-RESULT = L-VAR1 - L-VAR2 /* L-RESULT := L-VAR1 - L-VAR2
+WRITE 'Se calcula la resta de L-VAR1 y L-VAR2' (CD=YE AD=U)
+WRITE 'COMPUTE L-RESULT = L-VAR1 - L-VAR2:' L-RESULT
+  /
+*
+************************************************************************
+*                       MULTIPLICACIÓN
+************************************************************************
+*
+MULTIPLY L-VAR1 BY 3 /* L-VAR1 := L-VAR1 * 3
+WRITE 'Se multiplica L-VAR1 por 3' (CD=YE AD=U)
+WRITE 'MULTIPLY L-VAR1 BY 3' L-VAR1
+  /
+MULTIPLY L-VAR1 BY 4 GIVING L-VAR2 /* L-VAR2 := L-VAR1 * 4
+WRITE 'Se multiplica L-VAR1 por 4' (CD=YE AD=U)
+WRITE 'MULTIPLY L-VAR1 BY 4 GIVING L-VAR2:' L-VAR2
+  /
+COMPUTE L-RESULT = L-VAR1 * L-VAR2 /* L-RESULT := L-VAR1 * L-VAR2
+WRITE 'Se calcula el producto de L-VAR1 y L-VAR2' (CD=YE AD=U)
+WRITE 'COMPUTE L-RESULT = L-VAR1 * L-VAR2:' L-RESULT
+  /
+*
+************************************************************************
+*                         DIVISIÓN
+************************************************************************
+*
+DIVIDE 5 INTO L-VAR1 /* L-VAR1 = L-VAR1 / 5
+WRITE 'Se divide L-VAR1 por 5' (CD=YE AD=U)
+WRITE 'DIVIDE 5 INTO L-VAR1:' L-VAR1
+  /
+DIVIDE 5 INTO L-VAR1 GIVING L-VAR2 /* L-VAR2 := L-VAR1 / 5
+WRITE 'Se divide L-VAR1 por 5' (CD=YE AD=U)
+WRITE 'DIVIDE 5 INTO L-VAR1 GIVING L-VAR2:' L-VAR2
+  /
+WRITE 'Se divide L-RESULT por 5, cociente es L-RESULT y resto L-RESTO.' (CD=YE AD=U)
+WRITE 'DIVIDE 5 INTO L-RESULT REMAINDER L-RESTO:'
+WRITE ' Divide L-RESULT / 5:' (CD=PI) L-RESULT (CD=PI) '/5' (CD=PI)
+DIVIDE 5 INTO L-RESULT REMAINDER L-RESTO 
+WRITE ' Cociente L-RESULT:' (CD=PI) L-RESULT (CD=PI)
+WRITE ' Resto L-RESTO:' (CD=PI) L-RESTO (CD=PI)
+  /
+L-VAR1 := 12
+L-VAR2 := 2
+COMPUTE L-RESULT = L-VAR1 / L-VAR2 
+WRITE 'Se calcula la división de L-VAR1 entre L-VAR2' (CD=YE AD=U)
+WRITE 'COMPUTE L-RESULT = L-VAR1 / L-VAR2:' L-RESULT
+*
+END

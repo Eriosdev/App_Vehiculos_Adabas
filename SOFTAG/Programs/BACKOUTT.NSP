@@ -2,44 +2,50 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-** Example 'BOTEX1': BACKOUT TRANSACTION                                
-**                                                                      
-** CAUTION: Executing this example will modify the database records!    
 ************************************************************************
+*                                                                      *
+* https://documentation.softwareag.com/naturalONE/natONE911/natwin/sm/backout.htm
+*                                                                      *
+*                                                                      *                                                                    *
+*             END TRANSACTION    BACKOUT TRANSACTION                   *
+** CAUTION: Executing this example will modify the database records!   *
+************************************************************************
+*
 DEFINE DATA LOCAL                                                       
 1 EMPLOY-VIEW VIEW OF EMPLOYEES  
-2 APELLIDO                                       
-  2 NOMBRE                                                                
-  2 DEPARTAMENTO                                                                
-  2 SEXO                                                           
-  2 SALARIO (1)                                                        
+  2 FIRST-NAME
+  2 NAME                                                                
+  2 DEPT                                                                
+  2 SEX                                                           
+  2 SALARY (1)                                                        
 *                                                                       
-1 #DEPARTAMENTO (A6)                                                            
+1 #DEPT (A6)                                                            
 1 #RESP (A3)                                                            
 END-DEFINE                                                              
 *                                                                       
 LIMIT 3                                                                 
-INPUT 'DEPARTMENT TO BE UPDATED:' #DEPARTAMENTO    
-EXAMINE #DEPARTAMENTO TRANSLATE INTO UPPER
+INPUT 'Deparment TO BE UPDATED:' #DEPT    
+EXAMINE #DEPT TRANSLATE INTO UPPER
 
-IF #DEPARTAMENTO = ' '                                                          
+IF #DEPT = ' '                                                          
   STOP                                                                  
 END-IF                                       
 *                                            
-FIND EMPLOY-VIEW WITH DEPARTAMENTO = #DEPARTAMENTO           
+FIND EMPLOY-VIEW WITH DEPT = #DEPT           
   IF NO RECORDS FOUND                        
     REINPUT 'NO RECORDS FOUND'               
   END-NOREC                                  
-  INPUT 'Nombre:       ' NOMBRE (AD=O) /
-        'Apellido:     ' APELLIDO (AD=O) //      
-        'Sexo:         ' SEXO (AD=M) /
-        'Salario:      ' SALARIO (1) (AD=M)
+  INPUT 
+    'Nombre:       ' NAME (AD=O) /
+    'Apellido:     ' FIRST-NAME (AD=O) //
+    'Sexo:         ' SEX (AD=M) /
+    'Salario:      ' SALARY (1) (AD=M)
   UPDATE                                     
 END-FIND                                     
 *                                            
 INPUT 'UPDATE TO BE PERFORMED? YES/NO:' #RESP
 EXAMINE #RESP TRANSLATE INTO UPPER
-
+*
 DECIDE ON FIRST #RESP                        
   VALUE 'YES'                                
     END TRANSACTION                          

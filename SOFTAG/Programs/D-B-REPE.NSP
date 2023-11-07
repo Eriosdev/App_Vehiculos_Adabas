@@ -1,0 +1,47 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 11                                  *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 #CONTADOR (N8)
+END-DEFINE
+*
+************************************************************************
+*                          BUCLE REPEAT                                *
+************************************************************************
+*
+WRITE 'BUCLE INFINITO' (CD=YE AD=U)
+REPEAT /* BUCLE INFINITO
+  ADD 1 TO #CONTADOR
+  IF #CONTADOR = 5
+    /* SALE DEL BUCLE al siguiente comando despues de end-repeat
+    ESCAPE BOTTOM
+  END-IF
+  WRITE 'NRO. BUCLE: ' #CONTADOR
+END-REPEAT
+WRITE ' '
+*
+WRITE 'BUCLE CONTROLADO CON WHILE'(CD=YE AD=U)
+#CONTADOR:= 0
+REPEAT WHILE #CONTADOR <= 5 /* BUCLE CONTROLADO CON WHILE 
+  ADD 1 TO #CONTADOR
+  WRITE 'NRO. BUCLE: ' #CONTADOR
+END-REPEAT
+WRITE ' '
+*
+WRITE 'BUCLE CONTROLADO CON UNTIL'(CD=YE AD=U)
+#CONTADOR:= 0 
+REPEAT /* BUCLE CONTROLADO CON UNTIL 
+  ADD 1 TO #CONTADOR
+  WRITE 'NRO. BUCLE: '#CONTADOR 
+  UNTIL #CONTADOR = 5
+END-REPEAT
+END

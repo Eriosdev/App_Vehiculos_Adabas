@@ -2,7 +2,7 @@
 * :Mode S
 * :CP
 * <Natural Source Header
-*
+* Ejemplo de uso de una funcion
 WRITE PR-FUNCT(< 2,3 >)
 *
 END

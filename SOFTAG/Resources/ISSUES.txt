@@ -1,0 +1,3 @@
+Issues:
+
+	- ATBREAK 0046 NAT6245 Internal error: name rt_opse5 code 1967 subcode 18 Archivo: ATBREAK

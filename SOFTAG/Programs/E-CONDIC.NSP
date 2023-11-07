@@ -1,0 +1,75 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*             Código:    Formacion_Natural_ADABAS.pdf                  *
+*                                                                      *
+*                         Páginas: 12                                  *                                                                    *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA LOCAL
+1 #CONFIRMAR (A1)
+1 #VAR1 (N1)
+1 #VAR3 (A1)
+1 #OP (N1)
+END-DEFINE
+*
+************************************************************************
+*                              IF
+************************************************************************
+*
+INPUT 'NECESITAS AYUDA? (S/N):' #CONFIRMAR
+IF #CONFIRMAR = 'S'
+  WRITE 'HA CONFIRMADO QUE REQUIERE AYUDA...'
+ELSE
+*
+  IF #CONFIRMAR = 'N'
+    WRITE 'HA RECHAZADO LA AYUDA...'
+  ELSE
+    WRITE 'OPCIÓN NO VÁLIDA...'
+  END-IF
+*
+END-IF
+*
+************************************************************************
+*                            DECIDE
+************************************************************************
+*
+* COMPRUEBA LA PRIMERA CONDICION UNICAMENTE Y SALE DEL BUCLE
+*
+INPUT 'DECIDE FOR FIRST CONDITION -- INTRODUZCA VALOR A,B,C,D,E,F,G (A1) Y 1,2,3 (N1)' #VAR3 #OP
+*
+DECIDE FOR FIRST CONDITION 
+  WHEN #VAR3 = 'A' AND #OP = 1
+    WRITE 'A 1 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'B' AND #OP = 2
+    WRITE 'B 2 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'C' AND #OP = 3
+    WRITE 'C 3 HA SIDO SELECCIONADA...'
+  WHEN #VAR3 = 'D' THRU 'G'
+    WRITE 'HA SIDO SELECCIONADA...' #VAR3 '-' #OP
+  WHEN NONE
+    WRITE 'NO SE HA SELECCIONADO NINGUNA FUNCION...'
+END-DECIDE
+*
+* EVALUA UNA A UNA LAS CONDICIONES Y SI SE CUMPLEN LAS MUESTRA
+*
+INPUT 'DECIDE FOR EVERY CONDITION -- INTRODUZCA VALOR (N1)' #VAR1
+*
+DECIDE FOR EVERY CONDITION
+  WHEN #VAR1 >= 0
+    WRITE '#VAR1 ES UN VALOR POSITIVO...'
+  WHEN #VAR1 <= 0
+    WRITE '#VAR1 ES UN VALOR NEGATIVO...'
+  WHEN ANY /* NO OBLIGATORIO PONER
+    WRITE 'UNA DE LAS CONDICIONES ES VERDADERA'
+  WHEN ALL /* NO OBLIGATORIO PONER
+    WRITE '#VAR1 ES CERO...'
+  WHEN NONE /* OBLIGATORIO PONER
+    IGNORE
+END-DECIDE
+*
+END

@@ -11,25 +11,32 @@
 * La declaración ACCEPT/ REJECT se utiliza con los bucle de 
 * procesamiento READ, FIND, HISTOGRAM
 ************************************************************************
-
+*
 DEFINE DATA LOCAL
-/*( imported data fields from Data Definition Module EMPLOYEES
+*
 1 EMPLOYEES VIEW OF EMPLOYEES
-  2 NOMBRE (A20)
+  2 NAME (A20)
   2 MAR-STAT (A1)
-  2 SEXO (A1)
-/*) imported data fields from Data Definition Module EMPLOYEES
-
+  2 SEX (A1)
+*
 END-DEFINE
 *
+WRITE 'Uso de ACCEPT'  (CD=YE AD=U)
+WRITE 'Acepta solo los registros que coincidan SEX = M y MART-STAT = S' /
 READ (10) EMPLOYEES
-  ACCEPT IF SEXO='M' AND MAR-STAT = 'S'
-  WRITE  NOTITLE '=' NOMBRE '=' SEXO 5X '=' MAR-STAT
-  
+*
+* Acepta solo los registros que coincidan SEX = M y MART-STAT = S
+  ACCEPT IF SEX='M' AND MAR-STAT = 'S'
+  WRITE  NOTITLE '=' NAME '=' SEX 5X '=' MAR-STAT
+*  
 END-READ
-WRITE 'Uso de REJECT' 
+*
+WRITE / 'Uso de REJECT' (CD=YE AD=U)
+WRITE / 'Excluye a todo el que NAME = MORENO' /
 READ (10) EMPLOYEES
-  REJECT IF NOMBRE='PATRICE'
-  WRITE  NOTITLE '=' NOMBRE '=' SEXO 5X '=' MAR-STAT
+*
+* Excluye a todo el que NAME = MORENO
+  REJECT IF NAME='MORENO'
+  WRITE  NOTITLE '=' NAME '=' SEX 5X '=' MAR-STAT
 END-READ
 END

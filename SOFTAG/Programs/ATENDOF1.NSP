@@ -2,53 +2,55 @@
 * :Mode S
 * :CP
 * <Natural Source Header
+************************************************************************
+*                                                                      *
+* https://documentation.softwareag.com/naturalONE/natONE911/natwin/sm/atenddat.htm
+*                                                                      *
+*                           AT END OF DATE                             *
+*                                                                      *
+************************************************************************
+*
 DEFINE DATA LOCAL
-/* Definición de una estructura de datos llamada EMPLOY-VIEW basada en la vista EMPLOYEES */
-1 EMPLOY-VIEW VIEW OF EMPLOYEES
-  /* Declaración del campo NOMBRE en EMPLOY-VIEW */
-  2 NOMBRE
-    /* Declaración del campo APELLIDO en EMPLOY-VIEW */
-  2 APELLIDO
-    /* Declaración del campo COD-POSTAL en EMPLOY-VIEW */
-  2 COD-POSTAL
-    /* Declaración del campo CIUDAD en EMPLOY-VIEW */
-  2 CIUDAD
-/* Declaración de una variable local llamada #NW-APELLIDO con una longitud máxima de 20 caracteres */
-1 #NW-APELLIDO (A20)
+*
+1 EMPLOYEES VIEW OF EMPLOYEES
+  2 FIRST-NAME (A20)
+  2 NAME (A20)
+  2 CITY (A20)
+  2 ZIP (A10)
+*
+1 #NW-NAME (A20)
+*
 END-DEFINE
-
-/* Establece un formato de página de 21 líneas */
+*
 FORMAT PS=21
-
-/* Bucle de repetición */
+*
 REPEAT
-  /* Lee registros de EMPLOY-VIEW por APELLIDO igual a #NW-APELLIDO */
-  READ (15) EMPLOY-VIEW BY APELLIDO = #NW-APELLIDO
-/* Muestra los valores de NOMBRE, APELLIDO, COD-POSTAL y CIUDAD en la salida */
-    DISPLAY NOTITLE NOMBRE APELLIDO COD-POSTAL CIUDAD
+*
+  READ (15) EMPLOYEES BY NAME = #NW-NAME
+    DISPLAY NOTITLE NAME FIRST-NAME ZIP CITY
   END-READ
-
+*
   NEWPAGE
-
-  /*   
-  /* Punto de interrupción cuando se llega al final de la página */
+*
   AT END OF PAGE
-    /* Copia el valor de APELLIDO a #NW-APELLIDO */
-    MOVE APELLIDO TO #NW-APELLIDO
-    /* Solicita la reposición de la búsqueda por apellido */
+*
+    MOVE NAME TO #NW-NAME
+*   
+*   Solicita la reposición de la búsqueda por NAME
     INPUT / '-' (79)
-      / 10T 'Reposicion de busqueda por apellido ==>'
-      #NW-APELLIDO (AD=MI) '(''.'' to exit)'
-    EXAMINE #NW-APELLIDO TRANSLATE INTO UPPER
-    /* Si #NW-APELLIDO es igual a '.', detiene el programa */
-    IF #NW-APELLIDO = '.'
+      / 10T 'Reposicion de busqueda por NAME ==>'
+      #NW-NAME (AD=MI) '(''.'' to exit)'
+*
+    EXAMINE #NW-NAME TRANSLATE INTO UPPER /* paso a mayusculas
+*
+*   Si #NW-first-name es igual a '.', detiene el programa
+    IF #NW-NAME = '.'
       STOP
     END-IF
-    /* Fin de la página */
+*
   END-ENDPAGE
-/* Fin del bucle de repetición */
+*
 END-REPEAT
-
-/* Fin del programa */
+*
 END
 

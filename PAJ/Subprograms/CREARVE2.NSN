@@ -1,0 +1,63 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*   SUBPROGRAMA  PARA CREAR VEHICULO                                       *        
+*                                                                      *
+*   CREADO POR USARIO AAAAA                                            *
+*                     31/10/2023                                       *
+*                                                                      *
+*                                                                      *
+************************************************************************
+*
+DEFINE DATA
+PARAMETER
+1 CREARVE2
+  2 PAR-PROPIETARIO-ID   (A8)
+  2 PAR-MATRICULA       (A15)
+  2 PAR-BASTIDOR        (B4)
+  2 PAR-MARCA           (A20)
+  2 PAR-MODELO          (A20)
+  2 PAR-COLOR           (A10)
+  2 PAR-ANIO            (N4.0)
+  2 PAR-ERR             (N4)
+  2 PAR-DESC            (A70)
+LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 PROPIETARIO-ID   
+  2 MATRICULA      
+  2 BASTIDOR       
+  2 MARCA            
+  2 MODELO          
+  2 COLOR          
+  2 ANIO           
+*
+**********
+END-DEFINE 
+********** 
+*
+WRITE ' ENTRAMOS EN SUBPROGRAMA CON AREA INTERNA'
+*
+WRITE 'PAR-PROPIETARIO-ID .:' PAR-PROPIETARIO-ID 
+WRITE 'PAR-MATRICULA      .:' PAR-MATRICULA      
+WRITE 'PAR-BASTIDOR       .:' PAR-BASTIDOR       
+WRITE 'PAR-MARCA          .:' PAR-MARCA          
+WRITE 'PAR-MODELO         .:' PAR-MODELO         
+WRITE 'PAR-COLOR          .:' PAR-COLOR          
+WRITE 'PAR-ANIO           .:' PAR-ANIO           
+WRITE 'PAR-ERR            .:' PAR-ERR            
+WRITE 'PAR-DESC           .:' PAR-DESC           
+*
+VEHICLES.PROPIETARIO-ID  :=  CREARVE2.PAR-PROPIETARIO-ID 
+VEHICLES.MATRICULA       :=  CREARVE2.PAR-MATRICULA      
+VEHICLES.BASTIDOR        :=  CREARVE2.PAR-BASTIDOR       
+VEHICLES.MARCA           :=  CREARVE2.PAR-MARCA          
+VEHICLES.MODELO          :=  CREARVE2.PAR-MODELO         
+VEHICLES.COLOR           :=  CREARVE2.PAR-COLOR          
+VEHICLES.ANIO            :=  CREARVE2.PAR-ANIO           
+*
+STORE VEHICLES
+END TRANSACTION
+END

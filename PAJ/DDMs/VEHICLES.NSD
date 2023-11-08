@@ -1,0 +1,30 @@
+DB: 012 FILE: 012  - VEHICLES                         DEFAULT SEQUENCE: 
+TYPE: ADABAS 
+ 
+T L DB Name                              F Leng  S D Remark 
+- - -- --------------------------------  - ----  - - -------------------- 
+*      >Natural Source Header 000000
+*      :CP
+*      
+*      
+*      <Natural Source Header
+  1 AA MATRICULA                         A   15  N D 
+  1 AB BASTIDOR                          B    4  F 
+  1 AC PROPIETARIO-ID                    A    8  N D NC 
+  1 AC N@AC-1                            I    2    D INDICATOR OF AC-1 
+G 1 CD GRUPO-DETALLE 
+  2 AD MARCA                             A   20  N D 
+  2 AE MODELO                            A   20  N 
+  2 AF COLOR                             A   10  N D 
+  1 AG ANIO                              N  4.0  N 
+  1 AH CATEGORIA                         A    1  F D 
+  1 AI LEASE-PUR                         A    1  F 
+  1 AJ FECHA-COMPRA                      N  8.0  N 
+G 1 AK GRUPO-MANTENIMIENTO 
+  2 AL MONEDA                            A    3  N 
+M 2 AM COSTE-MANTENIMIEENTO              P  7.0  N 
+  1 AO SUPER-ANIO-MARCA                  A   24  N S 
+*      -------- SOURCE FIELD(S) ------- 
+*      YEAR(1-4) 
+*      MAKE(1-20) 
+******DDM OUTPUT TERMINATED****** 

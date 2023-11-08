@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TEMPLATE date="2023-11-08" environment="" name="" time="18:04:15"
+    type="DataBrowser" user="" version="1.0">
+    <DEFINITIONS>
+        <DESCRIPTION>Report for DDM EMPLOYEES</DESCRIPTION>
+        <RECORDLIMIT>100</RECORDLIMIT>
+        <FILTEREDBY>&gt;&gt; Physical Read &lt;&lt;</FILTEREDBY>
+        <OPTIONS>
+            <USEEDITMASK>None</USEEDITMASK>
+            <USEFIELDHEADER>None</USEFIELDHEADER>
+        </OPTIONS>
+    </DEFINITIONS>
+    <DDM dbid="012" fnr="011" name="EMPLOYEES" type="ada">
+        <FIELD Descriptor="D" Editmask="" Format="A"
+            Header="PERSONNEL/ID" Length="8" Level="1"
+            Name="PERSONNEL-ID" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="FULL-NAME" Type="G"/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header=""
+            Length="20" Level="2" Name="FIRST-NAME" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="" Length="1"
+            Level="2" Name="MIDDLE-I" Type=""/>
+        <FIELD Descriptor="D" Editmask="" Format="A" Header=""
+            Length="20" Level="2" Name="NAME" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header=""
+            Length="20" Level="1" Name="MIDDLE-NAME" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A"
+            Header="MARITAL/STATUS" Length="1" Level="1" Name="MAR-STAT" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="S/E/X"
+            Length="1" Level="1" Name="SEX" Type=""/>
+        <FIELD Descriptor="D" Editmask="YYYY-MM-DD" Format="D"
+            Header="DATE/OF/BIRTH" Length="6" Level="1" Name="BIRTH" Type=""/>
+        <FIELD Descriptor="D" Editmask="" Format="I" Header=""
+            Length="2" Level="1" Name="N@BIRTH" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="FULL-ADDRESS" Type="G"/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="ADDRESS"
+            Length="20" Level="2" Name="ADDRESS-LINE" Type="M">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="D" Editmask="" Format="A" Header=""
+            Length="20" Level="2" Name="CITY" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A"
+            Header="POSTAL/ADDRESS" Length="10" Level="2" Name="ZIP" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A"
+            Header="POSTAL/ADDRESS" Length="10" Level="2"
+            Name="POST-CODE" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="" Length="3"
+            Level="2" Name="COUNTRY" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="TELEPHONE" Type="G"/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="AREA/CODE"
+            Length="6" Level="2" Name="AREA-CODE" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="A" Header="TELEPHONE"
+            Length="15" Level="2" Name="PHONE" Type=""/>
+        <FIELD Descriptor="D" Editmask="" Format="A"
+            Header="DEPARTMENT/CODE" Length="6" Level="1" Name="DEPT" Type=""/>
+        <FIELD Descriptor="D" Editmask="" Format="A"
+            Header="CURRENT/POSITION" Length="25" Level="1"
+            Name="JOB-TITLE" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="INCOME" Type="P">
+            <OCC index="1">
+                <BEGIN>0</BEGIN>
+                <END>0</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="" Format="A"
+            Header="CURRENCY/CODE" Length="3" Level="2" Name="CURR-CODE" Type="">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="" Format="P"
+            Header="ANNUAL/SALARY" Length="9.0" Level="2" Name="SALARY" Type="">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="" Format="P" Header=""
+            Length="9.0" Level="2" Name="BONUS" Type="M">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+            <OCC index="2">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="LEAVE-DATA" Type="G"/>
+        <FIELD Descriptor="" Editmask="" Format="N" Header="LEAVE/DUE"
+            Length="2.0" Level="2" Name="LEAVE-DUE" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="N" Header=""
+            Length="2.0" Level="2" Name="LEAVE-TAKEN" Type=""/>
+        <FIELD Descriptor="" Editmask="" Format="" Header="" Length=""
+            Level="1" Name="LEAVE-BOOKED" Type="P">
+            <OCC index="1">
+                <BEGIN>0</BEGIN>
+                <END>0</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="9999/99/99" Format="N"
+            Header="LEAVE/START" Length="8.0" Level="2"
+            Name="LEAVE-START" Type="">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="" Editmask="9999/99/99" Format="N"
+            Header="LEAVE/END" Length="8.0" Level="2" Name="LEAVE-END" Type="">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="D" Editmask="" Format="A"
+            Header="LANG/SPOKEN" Length="3" Level="1" Name="LANG" Type="M">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+        <FIELD Descriptor="P" Editmask="" Format="A" Header=""
+            Length="20" Level="1" Name="PHONETIC-NAME" Type=""/>
+        <FIELD Descriptor="S" Editmask="" Format="B"
+            Header="LEAVE/REMAINING" Length="4" Level="1"
+            Name="LEAVE-LEFT" Type=""/>
+        <FIELD Descriptor="S" Editmask="" Format="A" Header="SECTION"
+            Length="4" Level="1" Name="DEPARTMENT" Type=""/>
+        <FIELD Descriptor="S" Editmask="" Format="A" Header=""
+            Length="26" Level="1" Name="DEPT-PERSON" Type=""/>
+        <FIELD Descriptor="S" Editmask="" Format="A" Header=""
+            Length="12" Level="1" Name="CURRENCY-SALARY" Type="P">
+            <OCC index="1">
+                <BEGIN>1</BEGIN>
+                <END>1</END>
+            </OCC>
+        </FIELD>
+    </DDM>
+    <GENERALFIELDS>
+        <FIELD Editmask="" Format="I" Header="" Length="4" Level="1"
+            Name=".COUNTER" Type="#"/>
+        <FIELD Editmask="" Format="P" Header="" Length="10" Level="1"
+            Name="*ISN" Type="#"/>
+    </GENERALFIELDS>
+</TEMPLATE>

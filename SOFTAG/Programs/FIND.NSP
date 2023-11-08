@@ -1,0 +1,191 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+*                                                                      *
+*                     De la ayuda de NaturalOne                       *
+*                                                                      *
+*                               FIND                                   *                                                                    *
+*                                                                      *
+************************************************************************
+*
+*
+DEFINE DATA LOCAL
+*                                                     
+1 EMPLOY-VIEW VIEW OF EMPLOYEES                                         
+  2 NAME                                                                
+  2 PERSONNEL-ID
+  2 CITY
+  2 BIRTH      
+  2 JOB-TITLE
+  2 FIRST-NAME
+*
+1 VEHIC-VIEW VIEW OF VEHICLES   
+  2 PROPIETARIO-ID
+  2 MARCA
+*                                                                 
+1 #PASSWORD (A8)
+1 #CIPHER   (N8)
+1 #BIRTH (D)   
+1 #BIRTH2 (D)                                                          
+*                                                       
+END-DEFINE                                                              
+
+*
+* EXAMPLE 3 - BASIC SEARCH CRITERIA IN WITH CLAUSE
+*
+DISPLAY NOTITLE 'BASIC SEARCH CRITERIA IN WITH CLAUSE'(CD=YE AD=U) /                                                                    
+FIND (2) EMPLOY-VIEW WITH NAME = 'AHL'
+  WRITE NOTITLE 'WITH NAME:' NAME CITY BIRTH
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+FIND (2) EMPLOY-VIEW WITH CITY NE 'BOSTON'
+  WRITE NOTITLE 'WITH CITY NE ''BOSTON'':' NAME  CITY 
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+MOVE EDITED '19400101' TO #BIRTH (EM=YYYYMMDD)
+FIND (2) EMPLOY-VIEW WITH BIRTH = #BIRTH
+  WRITE NOTITLE 'WITH BIRTH = #BIRTH: ' NAME CITY BIRTH
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+MOVE EDITED '19450101' TO #BIRTH2 (EM=YYYYMMDD)
+* 
+FIND (2) EMPLOY-VIEW WITH BIRTH = #BIRTH THRU #BIRTH2
+  WRITE NOTITLE 'WITH BIRTH = #BIRTH THRU #BIRTH2: ' NAME BIRTH
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+FIND (3) EMPLOY-VIEW WITH NAME = 'ADAM' OR = 'BAILLET' OR = 'BLOND'
+  WRITE NOTITLE ' NAME = ''ADAM'' OR = ''BAILLET'' OR = ''BLOND'':' NAME
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+FIND (2) EMPLOY-VIEW WITH PERSONNEL-ID = '2500' THRU '4000' 
+* BUT NOT '4000' THRU '5000'
+  WRITE NOTITLE "valor THRU valor2 BUT NOT valor3 THRU valor 4:" NAME
+END-FIND
+WRITE NOTITLE '---------------------------------------------------------'
+*
+NEWPAGE
+*
+** Example FIND (with SORTED BY clause)                       
+************************************************************************
+*
+WRITE NOTITLE 'WITH CITY = ''FRANKFURT'' SORTED BY NAME PERSONNEL-ID' (CD=YE AD=U)                                                                   
+FIND (10) EMPLOY-VIEW WITH CITY = 'FRANKFURT' SORTED BY NAME PERSONNEL-ID
+  DISPLAY NOTITLE NAME (IS=ON) PERSONNEL-ID                  
+END-FIND                                                                              
+*
+NEWPAGE
+*
+** FIND (with RETAIN clause and RELEASE statement)    
+************************************************************************
+*                                                                      
+DISPLAY NOTITLE 'FIND (with RETAIN clause and RELEASE statement)'(CD=YE AD=U) /                                                                          
+FIND NUMBER EMPLOY-VIEW WITH BIRTH GT #BIRTH RETAIN AS 'AGESET1'                                         
+IF *NUMBER = 0                                                          
+  STOP                                                                  
+END-IF                                                                  
+*                                                                       
+FIND (10) EMPLOY-VIEW WITH 'AGESET1' AND CITY = 'NEW YORK'
+  DISPLAY NOTITLE NAME CITY BIRTH (EM=YYYY-MM-DD)    
+END-FIND                                             
+*                                                    
+RELEASE SET 'AGESET1'      
+*
+NEWPAGE
+*
+** FIND (with WHERE clause)                           
+************************************************************************
+*
+DISPLAY NOTITLE 'FIND (with WHERE clause)'(CD=YE AD=U) /            
+FIND EMPLOY-VIEW WITH CITY = 'PARIS'                                    
+    WHERE JOB-TITLE = 'INGENIEUR COMMERCIAL'
+  DISPLAY NOTITLE                                                       
+    CITY JOB-TITLE PERSONNEL-ID NAME
+END-FIND     
+*
+NEWPAGE
+*
+*
+** FIND (using IF NO RECORDS FOUND)                   
+************************************************************************
+DISPLAY NOTITLE 'FIND (using IF NO RECORDS FOUND)'(CD=YE AD=U) /            
+EMP. READ (5) EMPLOY-VIEW BY NAME STARTING FROM 'JONES'                     
+  /*                                                                    
+  VEH. FIND VEHIC-VIEW WITH PROPIETARIO-ID = PERSONNEL-ID (EMP.)
+*        
+    IF NO RECORDS FOUND                                                 
+      MOVE '*** NO CAR ***' TO MARCA                                     
+    END-NOREC                                                    
+*                              
+    DISPLAY NOTITLE                  
+      NAME (EMP.) (IS=ON)
+      FIRST-NAME (EMP.) (IS=ON)
+      MARCA (VEH.)
+  END-FIND                           
+*                              
+END-READ     
+*
+*
+*
+*
+*
+*
+*
+*
+*
+*
+* NEWPAGE
+*
+** Example 'FNDCPL': FIND (using coupled files)                         
+** NOTE: Adabas files must be physically coupled when using the         
+**       COUPLED clause without the VIA clause.                         
+************************************************************************
+
+*                                                                       
+* FIND EMPLOY-VIEW WITH CITY = 'FRANKFURT' AND COUPLED TO VEHIC-VIEW WITH MARCA = 'VW'                             
+*   DISPLAY NOTITLE NAME                                                  
+* END-FIND 
+* * 
+* NEWPAGE
+* *
+* *
+* ** Example 'FNDVIA': FIND (with VIA clause)                             
+* ************************************************************************
+* *                                                                       
+* FIND EMPLOY-VIEW WITH NAME = 'ADKINSON'                                 
+*      AND COUPLED TO VEHIC-VIEW                                          
+*      VIA PERSONNEL-ID = PERSONNEL-ID WITH MARCA = 'VOLVO'    
+*   DISPLAY PERSONNEL-ID NAME                                   
+* END-FIND  
+*
+NEWPAGE
+* 
+** Example FIND (with PASSWORD clause)                        
+************************************************************************ 
+INPUT 'ENTER PASSWORD FOR EMPLOYEE FILE:' #PASSWORD (AD=N)              
+*
+DISPLAY NOTITLE 'Example FIND (with PASSWORD clause)'(CD=YE AD=U) /                                                         
+FIND (2) EMPLOY-VIEW PASSWORD = #PASSWORD WITH NAME = 'SMITH'                                    
+  DISPLAY NOTITLE NAME PERSONNEL-ID                                     
+END-FIND                                                                
+*  
+NEWPAGE
+* 
+** Example FIND (with PASSWORD/CIPHER clause)                 
+************************************************************************
+*
+INPUT 'ENTER PASSWORD FOR EMPLOYEE FILE:   ' #PASSWORD (AD=N)           
+  / 'ENTER CIPHER KEY FOR EMPLOYEE FILE: ' #CIPHER   (AD=N)
+*
+DISPLAY NOTITLE 'Example FIND (with PASSWORD/CIPHER clause)'(CD=YE AD=U) /
+FIND (2) EMPLOY-VIEW PASSWORD = #PASSWORD CIPHER = #CIPHER WITH NAME = 'SMITH'
+  DISPLAY NOTITLE NAME PERSONNEL-ID                                     
+END-FIND
+END
+*

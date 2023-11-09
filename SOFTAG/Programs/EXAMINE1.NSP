@@ -1,0 +1,138 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+** Example 'EXMEX1': EXAMINE                                            
+************************************************************************
+DEFINE DATA LOCAL                                                       
+1 #TEXT   (A45)                                                         
+1 #ARRAY  (A5/1:3)                                                      
+1 #A      (A3)                                                          
+1 #START  (N2)                                                          
+1 #NUM    (N2)                                                          
+1 #NUM1   (N2)                                                          
+1 #NUM2   (N2)                                                          
+1 #NUM3   (N2)                                                          
+1 #POS    (N2)                                                          
+1 #POS1   (N2)                                                          
+1 #LENG   (N2)                                                          
+1 #INDEX  (N2)                                                          
+END-DEFINE                                                              
+*                                                                       
+MOVE 'ABC   A B C   .A.  .B.  .C.    -A-  -B-  -C- ' TO #TEXT           
+*                                                                       
+WRITE / 'EXAMPLE 1  (DELIMITER, GIVING NUMBER)'                         
+WRITE NOTITLE '#TEXT: ' #TEXT                                           
+EXAMINE #TEXT FOR 'A' GIVING NUMBER #NUM1                               
+EXAMINE #TEXT FOR 'A' WITH DELIMITER GIVING NUMBER #NUM2                
+EXAMINE #TEXT FOR 'A' WITH DELIMITER '.' GIVING NUMBER #NUM3            
+WRITE 'EXAMINE #TEXT FOR "A" ' 57T 'Number found:' #NUM1                
+WRITE 'EXAMINE #TEXT FOR "A" WITH DELIMITER' 57T 'Number found:' #NUM2  
+WRITE 'EXAMINE #TEXT FOR "A" WITH DELIMITER "."'                        
+  57T 'Number found:' #NUM3                                             
+*                                                                       
+WRITE / 'EXAMPLE 2  (DELIMITER, REPLACE, GIVING NUMBER)'                
+WRITE 'EXAMINE #TEXT FOR "A" WITH DELIMITER "-" REPLACE WITH "*"'       
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR 'A' WITH DELIMITER '-' REPLACE WITH '*'               
+        GIVING NUMBER #NUM                                              
+WRITE 'After: ' #TEXT 57T 'Number found:' #NUM                          
+*                                                                       
+*                                                                       
+NEWPAGE                                                                 
+*                                                                       
+WRITE / 'EXAMPLE 3  (REPLACE, GIVING NUMBER)'                           
+WRITE 'EXAMINE      #TEXT FOR " " REPLACE WITH "+"'                     
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR ' ' REPLACE WITH '+' GIVING NUMBER #NUM               
+WRITE 'After: ' #TEXT 57T 'Number found:' #NUM                          
+*                                                                       
+WRITE / 'EXAMPLE 4  (FULL, REPLACE, GIVING NUMBER)'                     
+WRITE 'EXAMINE FULL #TEXT FOR " " REPLACE WITH "+"'                     
+WRITE 'Before:' #TEXT                                                   
+EXAMINE FULL #TEXT FOR ' ' REPLACE WITH '+' GIVING NUMBER #NUM          
+WRITE 'After: ' #TEXT 57T 'Number found:' #NUM                          
+*                                                                       
+WRITE / 'EXAMPLE 5  (DELETE, GIVING POSITION)'                          
+WRITE 'EXAMINE #TEXT FOR "+" DELETE GIVING POSITION #POS'               
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR '+' DELETE GIVING POSITION #POS                       
+WRITE 'After: ' #TEXT 57T 'Position found:' #POS                        
+*                                                                       
+WRITE / 'EXAMPLE 6  (DELETE, GIVING LENGTH)'                            
+WRITE 'EXAMINE #TEXT FOR "A" DELETE GIVING LENGTH #LENG'                
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR 'A' DELETE GIVING LENGTH #LENG                        
+WRITE 'After: ' #TEXT 57T 'Length found:' #LENG                         
+*                                                                       
+*                                                                       
+NEWPAGE                                                                 
+*                                                                       
+MOVE 'ABC   A B C   .A.  .B.  .C.    -A-  -B-  -C- ' TO #TEXT           
+*                                                                       
+WRITE / 'EXAMPLE 7  (PATTERN, REPLACE, GIVING NUMBER)'                  
+WRITE 'EXAMINE #TEXT FOR         ".A." AND REPLACE "***"'               
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR         '.A.' AND REPLACE '***' GIVING NUMBER #NUM    
+WRITE 'After: ' #TEXT 57T 'Number found:' #NUM                          
+*                                                                       
+MOVE 'ABC   A B C   .A.  .B.  .C.    -A-  -B-  -C- ' TO #TEXT           
+*                                                                       
+WRITE 'EXAMINE #TEXT FOR PATTERN ".A." AND REPLACE "***"'               
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR PATTERN '.A.' AND REPLACE '***' GIVING NUMBER #NUM    
+WRITE 'After: ' #TEXT 57T 'Number found:' #NUM                          
+*                                                                       
+MOVE 'ABC   A B C   .A.  .B.  .C.    -A-  -B-  -C- ' TO #TEXT           
+*                                                                       
+#A   := 'B C'                                                           
+#POS := 6                                                               
+#LENG:= 25                                                              
+*                                                                       
+WRITE / 'EXAMPLE 8  (SUBSTRING, REPLACE, GIVING POSITION)'              
+WRITE '#A := "B C" ; #POS := 6 ; #LENG:= 25 '                           
+WRITE 'EXAMINE SUBSTRING(#TEXT,#POS,#LENG) FOR #A AND REPLACE "***"'    
+WRITE 'Before:' #TEXT                                                   
+EXAMINE SUBSTRING(#TEXT,#POS,#LENG) FOR #A AND REPLACE '***'            
+        GIVING POSITION #POS1                                           
+WRITE 'After: ' #TEXT 57T 'Position found:' #POS1                       
+*                                                                       
+*                                                                       
+NEWPAGE                                                                 
+*                                                                       
+MOVE 'ABC   A B C   .A.  .B.  .C.    -A-  -B-  -C- ' TO #TEXT           
+*                                                                       
+WRITE / 'EXAMPLE 9  (DELETE, GIVING NUMBER, GIVING POSITION, '-         
+        'GIVING LENGTH)'                                                
+WRITE 'EXAMINE #TEXT FOR "." DELETE GIVING NUMBER   #NUM'               
+WRITE 30T 'GIVING POSITION #POS'                                        
+WRITE 30T 'GIVING LENGTH   #LENG'                                       
+WRITE 'Before:' #TEXT                                                   
+EXAMINE #TEXT FOR '.' DELETE GIVING NUMBER #NUM                         
+                             GIVING POSITION #POS                              
+                             GIVING LENGTH   #LENG                             
+WRITE 'After: ' #TEXT                                                   
+WRITE 'Number found:  ' #NUM                                            
+WRITE 'Position found:' #POS                                            
+WRITE 'Length found:  ' #LENG                                           
+*                                                                       
+*                                                                       
+*                                                                       
+MOVE 'ABC  ' TO #ARRAY (1)                                              
+MOVE '.A.B.' TO #ARRAY (2)                                              
+MOVE '-A-B-' TO #ARRAY (3)                                              
+*                                                                       
+WRITE / 'EXAMPLE 10 (GIVING NUMBER, GIVING POSITION, GIVING INDEX)'     
+WRITE '#ARRAY(1):' #ARRAY(1)                                            
+WRITE '#ARRAY(2):' #ARRAY(2)                                            
+WRITE '#ARRAY(3):' #ARRAY(3)                                            
+WRITE 'EXAMINE #ARRAY(*) FOR "B" GIVING NUMBER   #NUM'                  
+WRITE 27T 'GIVING POSITION #POS'                                        
+WRITE 27T 'GIVING INDEX    #INDEX'                                      
+EXAMINE #ARRAY(*) FOR 'B' GIVING NUMBER   #NUM                          
+                          GIVING POSITION #POS                          
+                          GIVING INDEX    #INDEX                        
+WRITE 'Number found:  ' #NUM                                            
+WRITE 'Position found:' #POS                                            
+WRITE 'Index found:   ' #INDEX                                          
+END

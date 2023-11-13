@@ -1,0 +1,117 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+*************************RELLENA UN ARRAY*******************************
+************************************************************************
+*
+DEFINE DATA LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 PROPIETARIO-ID (A8) /* NC
+  2 MARCA (A20)
+  2 MODELO (A20)
+  2 ANIO (N4.0)
+  2 GRUPO-MANTENIMIENTO
+    3 MONEDA (A3)
+    3 COSTE-MANTENIMIEENTO (P7.0/1:191)
+*
+1 ID-MAT
+  2 PAJ-I-PROPIETARIO-ID (A8)
+  2 PAJ-I-MATRICULA (A15)
+*
+1 REG-FOUND (L) INIT <FALSE>
+*
+END-DEFINE
+*
+SET KEY PF3 NAMED 'SALIR'
+*
+PERFORM PAJ-S-ID-MAT
+*
+* Subrutina que pregunta por id y matricula 
+************************************************************************
+DEFINE SUBROUTINE PAJ-S-ID-MAT
+************************************************************************
+*
+RESET ID-MAT
+*
+INPUT USING MAP 'ID-MAT' /* Mapa para introducir id y matridula
+*
+DECIDE ON FIRST VALUE *PF-KEY
+*
+  VALUE 'PF3'
+    WRITE 'Adios'
+    ESCAPE ROUTINE
+  VALUE 'ENTR'
+*
+    /* Si no ha encontrado los datos 
+    IF REG-FOUND = FALSE
+*
+      IF ID-MAT.PAJ-I-PROPIETARIO-ID = ' ' 
+          OR ID-MAT.PAJ-I-MATRICULA = ' '
+        /* Si no se ingresan valores
+        REINPUT 'Los campos NO pueden estar vacíos' 
+      END-IF
+*
+     FIND (1) VEHICLES WITH PROPIETARIO-ID = ID-MAT.PAJ-I-PROPIETARIO-ID
+          AND MATRICULA= ID-MAT.PAJ-I-MATRICULA
+*
+        IF NO RECORD FOUND
+          REINPUT 'Error en los datos, no se encuentra '
+        END-NOREC
+        MOVE TRUE TO REG-FOUND
+*
+*       Si pasa la validación llama a la subrutina que muestra los datos
+        PERFORM PAJ-S-DATA
+*
+      END-FIND
+*
+*     ELSE /* Sale REPEAT si REG-FOUND es TRUE
+*       WRITE 'Adios'
+*       ESCAPE ROUTINE
+     END-IF
+*
+  NONE VALUE
+    IGNORE
+*
+END-DECIDE
+*
+************************************************************************
+END-SUBROUTINE /* PAJ-S-ID-MAT
+************************************************************************
+*
+* Subrutina que muestra los datos
+************************************************************************
+DEFINE SUBROUTINE PAJ-S-DATA
+************************************************************************
+*
+* Escribe la cabecera
+WRITE TITLE LEFT JUSTIFIED UNDERLINED
+  3X 'Modifica array por id y matricula' (I)
+  3X ID-MAT.PAJ-I-PROPIETARIO-ID (CD=PI) ID-MAT.PAJ-I-MATRICULA (CD=PI)
+*
+* Busca los datos por id y matricula, 
+* y los presenta en el mapa para actualizar
+FIND (1) VEHICLES WITH PROPIETARIO-ID = ID-MAT.PAJ-I-PROPIETARIO-ID
+    AND MATRICULA= ID-MAT.PAJ-I-MATRICULA
+*
+  WRITE NOTITLE VEHICLES.COSTE-MANTENIMIEENTO (1) MONEDA
+*
+END-FIND
+*
+************************************************************************
+END-SUBROUTINE /* PAJ-S-DATA
+************************************************************************
+*
+END

@@ -1,0 +1,43 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 8 nov 2023
+* 
+* 
+*****************Lectura de un array************************************
+************************************************************************
+************************************************************************
+************************************************************************
+*
+DEFINE DATA LOCAL
+*
+1 VEHICLES VIEW OF VEHICLES
+  2 MATRICULA (A15)
+  2 PROPIETARIO-ID (A8) /* NC
+  2 GRUPO-MANTENIMIENTO
+    3 MONEDA (A3)
+    3 COSTE-MANTENIMIEENTO (P7.0/1:191)
+*
+1 PAJ-CONT (N4) INIT <1>
+END-DEFINE
+*
+READ (1) VEHICLES BY MARCA
+*
+  WRITE TITLE LEFT JUSTIFIED UNDERLINED 
+    *TIMX *DATD
+    3X 'Gastos Mantenimiento' (I)
+    3X PROPIETARIO-ID (CD=PI) MATRICULA (CD=PI)
+    11X 'PAGE:' *PAGE-NUMBER
+*    
+  FOR PAJ-CONT = 1 TO 191 STEP 1
+    WRITE NOTITLE '=' COSTE-MANTENIMIEENTO (PAJ-CONT) MONEDA PAJ-CONT
+  END-FOR
+*
+END-READ
+END

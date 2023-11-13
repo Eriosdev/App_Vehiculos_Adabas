@@ -1,0 +1,46 @@
+* >Natural Source Header 000000
+* :Mode S
+* :CP
+* <Natural Source Header
+************************************************************************
+* *
+* *
+* ** AUTOR: PAJ
+*
+** ** FECHA: 13 nov 2023
+* 
+* 
+************************************************************************
+************************************************************************
+************************************************************************
+************************************************************************
+*
+                                                        
+DEFINE DATA LOCAL
+1 #ANUMBER   (P20)
+1 #I         (P2)
+1 #J         (P20)
+1 #K         (P20)
+1 #L         (P20) INIT <1152921504606846976> /* 1000000000000000 in Hex
+1 #BIN       (B1)
+1 #BINA      (A2)
+1 REDEFINE #BINA
+  2 #FIL1    (A1)
+  2 #BINX    (A1)
+1 #BIN-VAL   (A16)
+1 REDEFINE #BIN-VAL
+  2 #BIN-ARR (A1/1:16)
+1 #BINCONV   (B4)
+END-DEFINE
+INPUT 'Number to convert to binary' #ANUMBER 
+FOR #I 1 4
+  DIVIDE #L INTO #ANUMBER GIVING #J REMAINDER #K
+  #ANUMBER := #K
+  COMPUTE #L := #L / 4
+  MOVE #J TO #BIN
+  MOVE EDITED #BIN(EM=HH) TO #BINA 
+  #BIN-ARR(#I) := #BINX 
+END-FOR
+MOVE EDITED #BIN-VAL TO #BINCONV(EM=H(4)) 
+WRITE 'Converted to binary' #BINCONV
+END
